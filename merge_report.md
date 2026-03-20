@@ -38,7 +38,7 @@
 |--------|-------------------------------------------|-----------------------------------------------------------|
 | Claude | 005–065 (61 Seiten)                       | 002–004 (Scans jetzt verfügbar); 066–110 (neu)           |
 | Gemini | 005–015, 021–028, 031–039 (28 Seiten)     | 016–020, 029–030, 040–044; auch 002–004, 045–110         |
-| Codex  | 005–008, 011–012, 017, 021–022, 036–038 (12 Seiten) | 009–010, 013–016, 018–020, 023–030, 031–035, 039–044; auch 002–004, 045–110 |
+| Codex  | 005–009, 011–012, 017, 021–022, 036–038 (13 Seiten) | 010, 013–016, 018–020, 023–030, 031–035, 039–044; auch 002–004, 045–110 |
 
 ## Rate-Limit-Protokoll
 
@@ -53,3 +53,4 @@
 | 2026-03-20  | Gemini | 016   | QUOTA_EXHAUSTED — „Reset nach 11h27m". Gemini-Verarbeitung gestoppt. |
 | 2026-03-20  | Codex  | 008   | Seite 008 erfolgreich transkribiert. |
 | 2026-03-20  | Claude | 062–065 | Seiten 062–065 erfolgreich transkribiert und als Merged-Files gespeichert. |
+| 2026-03-20  | Codex  | 009   | Seite 009 erfolgreich transkribiert. |
