@@ -32,13 +32,13 @@
     Seite 001 ist das Deckblatt (keine Texttranskription nötig).
   - Seiten 045–110: 66 neue Chronik-Seiten (~1904–1940er). Vollständige Triple-LLM-Pipeline ausstehend.
 
-## Phase-4-Status (Stand: 2026-03-20, nach Rate-Limit)
+## Phase-4-Status (Stand: 2026-03-20, Batch 2)
 
 | LLM    | Seiten fertig                             | Seiten fehlend                                            |
 |--------|-------------------------------------------|-----------------------------------------------------------|
-| Claude | 005–061 (57 Seiten)                       | 002–004 (Scans jetzt verfügbar); 062–110 (neu)           |
+| Claude | 005–065 (61 Seiten)                       | 002–004 (Scans jetzt verfügbar); 066–110 (neu)           |
 | Gemini | 005–015, 021–028, 031–039 (28 Seiten)     | 016–020, 029–030, 040–044; auch 002–004, 045–110         |
-| Codex  | 005–007, 011–012, 017, 021–022, 036–038 (11 Seiten) | 008–010, 013–016, 018–020, 023–030, 031–035, 039–044; auch 002–004, 045–110 |
+| Codex  | 005–008, 011–012, 017, 021–022, 036–038 (12 Seiten) | 009–010, 013–016, 018–020, 023–030, 031–035, 039–044; auch 002–004, 045–110 |
 
 ## Rate-Limit-Protokoll
 
@@ -50,3 +50,6 @@
 | 2026-03-20  | Codex  | 007   | Seite 007 transkribiert (niedrige Qualität, viele [unleserlich]). Seite 008 in Bearbeitung. |
 | 2026-03-20  | Gemini | 017   | QUOTA_EXHAUSTED — „Reset nach 11h47m". Gemini-Verarbeitung gestoppt. |
 | 2026-03-20  | Claude | 061   | Seite 061 erfolgreich transkribiert und als Merged-File gespeichert. |
+| 2026-03-20  | Gemini | 016   | QUOTA_EXHAUSTED — „Reset nach 11h27m". Gemini-Verarbeitung gestoppt. |
+| 2026-03-20  | Codex  | 008   | Seite 008 erfolgreich transkribiert. |
+| 2026-03-20  | Claude | 062–065 | Seiten 062–065 erfolgreich transkribiert und als Merged-Files gespeichert. |
