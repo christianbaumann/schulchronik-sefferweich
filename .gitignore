@@ -1,0 +1,18 @@
+# LaTeX build artifacts
+latex/*.aux
+latex/*.log
+latex/*.out
+latex/*.toc
+latex/*.pdf
+latex/*.bbl
+latex/*.blg
+latex/*.synctex.gz
+latex/*.1
+latex/*.1R
+latex/*.end
+latex/*.enR
+latex/*.fls
+latex/*.fdb_latexmk
+
+# OS files
+.DS_Store
