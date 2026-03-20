@@ -16,3 +16,6 @@ latex/*.fdb_latexmk
 
 # OS files
 .DS_Store
+
+# Agent docs
+docs/

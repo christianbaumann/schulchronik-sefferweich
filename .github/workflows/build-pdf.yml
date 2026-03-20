@@ -19,16 +19,13 @@ permissions:
   pages: write
   id-token: write
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   regenerate:
     runs-on: ubuntu-latest
     outputs:
       changed: ${{ steps.commit.outputs.changed }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Regenerate schulchronik.tex from pages
         run: python3 latex/generate_main.py
@@ -48,7 +45,7 @@ jobs:
     needs: regenerate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: ${{ github.ref }}
 
@@ -82,7 +79,7 @@ jobs:
           sed "s/{{BUILD_DATE}}/$BUILD_DATE/g" .github/pages/index.html > _site/index.html
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: _site
 
