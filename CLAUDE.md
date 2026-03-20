@@ -53,10 +53,9 @@ Raw subfolders (`claude/`, `gemini/`, `codex/`) store **verbatim LLM output** �
 - Timeout: 5 minutes per call.
 
 #### Parallelization Strategy
-- **Gemini and Codex calls for different pages run in parallel** via subagents — different providers, no shared rate limits.
-- **Claude transcriptions** run in parallel via subagents (no external rate limits).
-- **All three LLMs for the same page can run concurrently** since they are independent.
-- Use subagents to maximize throughput: one subagent per LLM×page combination where possible.
+- **Only one transcription process per LLM at a time.** Do not run multiple Claude subagents, Gemini calls, or Codex calls concurrently.
+- **Different LLMs can run in parallel** — one Claude + one Gemini + one Codex at the same time is fine (different providers).
+- Process pages sequentially within each LLM stream.
 
 #### Phase 2d: 3-Way Merge (`claude/ + gemini/ + codex/` → `Transkript/`)
 - Claude reads all three raw transcriptions + the scan, performs word-by-word 3-way comparison using Tiers 0–8:
@@ -88,7 +87,8 @@ Raw subfolders (`claude/`, `gemini/`, `codex/`) store **verbatim LLM output** �
 ### Workflow
 - Work in batches of ~10 pages. After each batch: update `Transkript.txt`, update `raw_mapping.json`, move raw files to `done/`, and **commit**.
 - **Progress output:** When working on multiple pages, give detailed status updates: which page is being read, transcribed, or written. Announce each sub-task (e.g., "Reading scan 016...", "Writing Transkript/016.md...", "Updating Transkript.txt with pages 016-020...", "Committing batch 016-020...").
-- **Use subagents** to parallelize writing of transcript files when transcribing batches of pages. Read all scans first, then spawn subagents to write multiple transcript files concurrently.
+- **Always start with the lowest page number not yet transcribed** for each LLM stream.
+- **Incremental updates:** As soon as any single LLM transcription for a page completes, update `Transkript.txt` and `merge_report.md` — do not wait for all three LLMs to finish that page.
 - **Update CLAUDE.md after every relevant workflow or structural change.**
 
 ### Phase 3: Consolidation (`Transkript/` → `Transkript.txt`)

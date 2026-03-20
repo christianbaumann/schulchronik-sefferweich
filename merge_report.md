@@ -35,9 +35,9 @@
 
 | LLM    | Seiten fertig                             | Seiten fehlend                                            |
 |--------|-------------------------------------------|-----------------------------------------------------------|
-| Claude | 005–044 (40 Seiten)                       | 002–004 (Scans jetzt verfügbar); 045–110 (neu)           |
-| Gemini | 005–014, 021–028, 031–039 (27 Seiten)     | 015–020, 029–030, 040–044; auch 002–004, 045–110         |
-| Codex  | 005–006, 011–012, 021–022, 036–038 (9 Seiten) | 007–010, 013–020, 023–030, 031–035, 039–044; auch 002–004, 045–110 |
+| Claude | 005–055 (51 Seiten)                       | 002–004 (Scans jetzt verfügbar); 056–110 (neu)           |
+| Gemini | 005–015, 021–028, 031–039 (28 Seiten)     | 016–020, 029–030, 040–044; auch 002–004, 045–110         |
+| Codex  | 005–007, 011–012, 021–022, 036–038 (10 Seiten) | 008–010, 013–020, 023–030, 031–035, 039–044; auch 002–004, 045–110 |
 
 ## Rate-Limit-Protokoll
 
@@ -45,3 +45,5 @@
 |-------------|--------|-------|-------------------------------------------------------------------------------------------------------------------------------------------------|
 | 2026-03-20  | Gemini | ~015  | Tages-Kontingent erreicht — „Reset 17 Uhr (Europe/Berlin)". Gespeichert: 005–014, 021–028, 031–039. Fehlend: 015–020, 029–030, 040–044         |
 | 2026-03-20  | Codex  | ~013  | Tages-Kontingent erreicht — „Reset 17 Uhr (Europe/Berlin)". Gespeichert: 005–006, 011–012, 021–022, 036–038. Fehlend: 007–010, 013–020, 023–030, 031–035, 039–044 |
+| 2026-03-20  | Gemini | 015   | Seite 015 erfolgreich transkribiert. Seite 016: QUOTA_EXHAUSTED (retryDelay ~12,7h). Gemini-Verarbeitung gestoppt. |
+| 2026-03-20  | Codex  | 007   | Seite 007 transkribiert (niedrige Qualität, viele [unleserlich]). Seite 008 in Bearbeitung. |
