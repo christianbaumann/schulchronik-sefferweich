@@ -2,13 +2,16 @@
 
 In der Gemeinde [Sefferweich](https://www.sefferweich.de) (Eifelkreis Bitburg-Prüm) existiert eine handgeschriebene Schulchronik aus dem 19. und 20. Jahrhundert. Generationen von Lehrern haben darin das Leben in den Dörfern [Sefferweich](https://www.sefferweich.de), Seffern, Bickendorf und Malbergweich festgehalten — von Schulalltag und Wetter über Ernten und Epidemien bis hin zu Kriegen und politischen Umbrüchen. Die ältesten Einträge stammen aus dem Jahr 1851.
 
-Die Chronik ist in *Kurrentschrift* verfasst, einer alten deutschen Handschrift, die heute kaum noch jemand lesen kann. Um den Inhalt zugänglich zu machen, wird der Text mit Hilfe von künstlicher Intelligenz entziffert und in eine moderne, lesbare Form gebracht.
+Die Chronik ist in *Kurrentschrift* und *Sütterlin* verfasst, alten deutschen Handschriften, die heute kaum noch jemand lesen kann. Um den Inhalt zugänglich zu machen, wird der Text mit Hilfe von künstlicher Intelligenz entziffert und in eine moderne, lesbare Form gebracht.
 
 ## Wie funktioniert das?
 
 Als Vorlage dient eine Fotokopie der Originalchronik. Die einzelnen Seiten werden mit [Google Fotoscanner](https://www.google.com/intl/de/photos/scan/) digitalisiert und dann von **drei verschiedenen KI-Systemen** unabhängig voneinander gelesen (Claude von Anthropic, Gemini von Google und Codex von OpenAI). Jedes System liefert seine eigene Lesung — und wie bei drei unabhängigen Zeugen lassen sich die Ergebnisse anschließend vergleichen: Wo alle drei übereinstimmen, ist der Text so gut wie sicher. Wo sie voneinander abweichen, wird anhand des Originalfotos geprüft, welche Lesung am plausibelsten ist. Stellen, die auch nach diesem Abgleich unklar bleiben, werden als unsicher markiert.
 
 Aus den zusammengeführten Ergebnissen entsteht am Ende ein durchsuchbarer Gesamttext sowie eine druckfertige PDF-Ausgabe.
+
+**[→ Aktuelle PDF-Version der Schulchronik herunterladen](https://christianbaumann.github.io/schulchronik-sefferweich/schulchronik.pdf)**
+Die PDF wird bei jedem neuen Transkriptionsfortschritt automatisch aktualisiert.
 
 Das Projekt ist ein Vorhaben des **Arbeitskreises Geschichte [Sefferweich](https://www.sefferweich.de)**.
 

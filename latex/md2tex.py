@@ -414,6 +414,9 @@ def emit_page(page_num: str, classified: list[LineInfo],
     margin_at = {}  # line_idx -> margin_text (joined with \\\\)
     for mg_lines, first_idx in margin_groups:
         joined = "\\\\".join(mg_lines)
+        # Protect \\[ sequences: LaTeX interprets \\[ as linebreak + optional
+        # vertical spacing argument.  Insert {} to break the parse.
+        joined = joined.replace("\\\\[", "\\\\{}[")
         margin_at[first_idx] = joined
 
     # Determine if page starts with heading
