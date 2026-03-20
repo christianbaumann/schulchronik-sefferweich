@@ -35,7 +35,7 @@
 
 | LLM    | Seiten fertig                             | Seiten fehlend                                            |
 |--------|-------------------------------------------|-----------------------------------------------------------|
-| Claude | 005–055 (51 Seiten)                       | 002–004 (Scans jetzt verfügbar); 056–110 (neu)           |
+| Claude | 005–061 (57 Seiten)                       | 002–004 (Scans jetzt verfügbar); 062–110 (neu)           |
 | Gemini | 005–015, 021–028, 031–039 (28 Seiten)     | 016–020, 029–030, 040–044; auch 002–004, 045–110         |
 | Codex  | 005–007, 011–012, 021–022, 036–038 (10 Seiten) | 008–010, 013–020, 023–030, 031–035, 039–044; auch 002–004, 045–110 |
 
@@ -47,3 +47,5 @@
 | 2026-03-20  | Codex  | ~013  | Tages-Kontingent erreicht — „Reset 17 Uhr (Europe/Berlin)". Gespeichert: 005–006, 011–012, 021–022, 036–038. Fehlend: 007–010, 013–020, 023–030, 031–035, 039–044 |
 | 2026-03-20  | Gemini | 015   | Seite 015 erfolgreich transkribiert. Seite 016: QUOTA_EXHAUSTED (retryDelay ~12,7h). Gemini-Verarbeitung gestoppt. |
 | 2026-03-20  | Codex  | 007   | Seite 007 transkribiert (niedrige Qualität, viele [unleserlich]). Seite 008 in Bearbeitung. |
+| 2026-03-20  | Gemini | 017   | QUOTA_EXHAUSTED — „Reset nach 11h47m". Gemini-Verarbeitung gestoppt. |
+| 2026-03-20  | Claude | 061   | Seite 061 erfolgreich transkribiert und als Merged-File gespeichert. |
