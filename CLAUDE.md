@@ -41,14 +41,14 @@ Raw subfolders (`claude/`, `gemini/`, `codex/`) store **verbatim LLM output** �
 #### Phase 2b: Gemini Transcription (`Scans/` → `Transkript/gemini/`)
 - **Gemini CLI invocation:**
   ```bash
-  gemini -m gemini-2.5-pro -p "Transkribiere den Text als Markdown. Versuche das Layout beizubehalten. Sprache ist deutsch. Schrift ist Sütterlin oder Kurrent. Füge am Anfang Hinweise zur Transkription hinzu und am Ende historische Erläuterungen. @Scans/NNN.jpg" -o text
+  gemini -m gemini-2.5-pro -p "Transkribiere den Text als Markdown. Versuche das Layout beizubehalten. Sprache ist deutsch. Schrift ist Kurrent. Füge am Anfang Hinweise zur Transkription hinzu und am Ende historische Erläuterungen. @Scans/NNN.jpg" -o text
   ```
 - Timeout: 5 minutes per call.
 
 #### Phase 2c: Codex Transcription (`Scans/` → `Transkript/codex/`)
 - **Codex CLI invocation:**
   ```bash
-  codex exec -i Scans/NNN.jpg -m gpt-5.4 -s read-only --ephemeral "Transkribiere den Text als Markdown. Versuche das Layout beizubehalten. Sprache ist deutsch. Schrift ist Sütterlin oder Kurrent. Füge am Anfang Hinweise zur Transkription hinzu und am Ende historische Erläuterungen." -o /tmp/codex_NNN.md
+  codex exec -i Scans/NNN.jpg -m gpt-5.4 -s read-only --ephemeral "Transkribiere den Text als Markdown. Versuche das Layout beizubehalten. Sprache ist deutsch. Schrift ist Kurrent. Füge am Anfang Hinweise zur Transkription hinzu und am Ende historische Erläuterungen." -o /tmp/codex_NNN.md
   ```
 - Timeout: 5 minutes per call.
 
@@ -100,6 +100,13 @@ Raw subfolders (`claude/`, `gemini/`, `codex/`) store **verbatim LLM output** �
 - Extract text from inside the `` ```text `` code blocks only (strip AI wrapper/metadata).
 - Separate page sections with `------------`.
 - Output is `Transkript.txt` — a seamless plain-text reconstruction of the entire chronicle.
+
+## Script Type (Kurrent vs. Sütterlin)
+
+- The chronicle is written in **Kurrent** (deutsche Kurrentschrift), not Sütterlin. Sütterlin was only introduced in 1911 and the chronicle predates this.
+- **Do not include comments** about whether the script is Sütterlin or Kurrent in any transcript file (raw or merged). This applies to Hinweise sections, Analyse sections, and Codex/Gemini prompts.
+- **Prompts to Gemini/Codex** should say "Schrift ist Kurrent" (not "Sütterlin oder Kurrent").
+- **Claude sub-agent prompts** should say "script is Kurrent" (not "Sütterlin/Kurrent").
 
 ## Transcription Conventions
 
