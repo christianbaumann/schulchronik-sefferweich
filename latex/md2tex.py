@@ -90,6 +90,33 @@ def analyze_layout(lines: list[str], page_num_idx: int) -> LayoutInfo:
 
     has_margin = any(s < main_col - 4 for s in starts)
 
+    # Gap verification: on pages where centered headings inflate main_col,
+    # body text starting at col 0 gets mis-classified as margin content.
+    # Real margin+text lines have an internal gap (3+ spaces) between the
+    # margin annotation and the main text.  If most would-be margin lines
+    # lack such a gap, the page has no actual margin layout.
+    if has_margin:
+        gap_lines = 0
+        no_gap_lines = 0
+        for i, line in enumerate(lines):
+            if i == page_num_idx or not line.strip():
+                continue
+            stripped = line.strip()
+            if stripped in ("———", "————", "———————", "========", "--------"):
+                continue
+            first_char = len(line) - len(line.lstrip(" "))
+            line_len = len(line.rstrip())
+            if first_char < main_col - 4 and line_len > main_col:
+                # This line would be classified as margin_and_text
+                text = line.rstrip()
+                if re.search(r'\S\s{3,}\S', text):
+                    gap_lines += 1
+                else:
+                    no_gap_lines += 1
+        if no_gap_lines > gap_lines:
+            # Most "margin" lines have no gap → body text at col 0
+            has_margin = False
+
     # Diary detection: check if margin-column text looks like dates
     is_diary = False
     if has_margin:
@@ -139,7 +166,9 @@ def classify_lines(lines: list[str], layout: LayoutInfo,
 
         # Determine column positions
         first_char_pos = len(line) - len(line.lstrip(" "))
-        has_margin_content = first_char_pos < mc - 4 if mc > 4 else False
+        has_margin_content = (layout.has_margin_notes
+                              and first_char_pos < mc - 4
+                              if mc > 4 else False)
 
         if has_margin_content:
             margin_part = line[:mc].rstrip()
