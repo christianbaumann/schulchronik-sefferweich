@@ -1,0 +1,67 @@
+name: Build Schulchronik PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'latex/**'
+      - 'Scans/embedded/**'
+  workflow_dispatch:
+
+# Only allow one deployment at a time
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build PDF
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: schulchronik.tex
+          working_directory: latex
+          latexmk_use_lualatex: true
+
+      - name: Prepare Pages site
+        run: |
+          mkdir -p _site
+          cp latex/schulchronik.pdf _site/schulchronik.pdf
+          BUILD_DATE=$(date -u +"%d. %B %Y" | sed \
+            -e 's/January/Januar/' \
+            -e 's/February/Februar/' \
+            -e 's/March/März/' \
+            -e 's/April/April/' \
+            -e 's/May/Mai/' \
+            -e 's/June/Juni/' \
+            -e 's/July/Juli/' \
+            -e 's/August/August/' \
+            -e 's/September/September/' \
+            -e 's/October/Oktober/' \
+            -e 's/November/November/' \
+            -e 's/December/Dezember/')
+          sed "s/{{BUILD_DATE}}/$BUILD_DATE/g" .github/pages/index.html > _site/index.html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

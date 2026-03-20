@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Schul-Chronik Sefferweich</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #f5f1eb;
+      color: #2c2c2c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      padding: 3rem 2.5rem;
+      max-width: 480px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 0.3rem;
+      font-weight: normal;
+      font-style: italic;
+    }
+    .subtitle {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 2rem;
+    }
+    .download-btn {
+      display: inline-block;
+      background: #8b4513;
+      color: white;
+      text-decoration: none;
+      padding: 0.9rem 2.5rem;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      transition: background 0.2s;
+    }
+    .download-btn:hover { background: #6b3410; }
+    .meta {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #888;
+    }
+    .meta p { margin: 0.3rem 0; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Schul-Chronik Sefferweich</h1>
+    <p class="subtitle">Transkription (1851 ff.)</p>
+    <a href="schulchronik.pdf" class="download-btn">PDF herunterladen</a>
+    <div class="meta">
+      <p>Letzte Aktualisierung: {{BUILD_DATE}}</p>
+      <p>Arbeitskreis Geschichte Sefferweich</p>
+    </div>
+  </div>
+</body>
+</html>
