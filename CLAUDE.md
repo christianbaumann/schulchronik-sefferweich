@@ -85,10 +85,10 @@ Raw subfolders (`claude/`, `gemini/`, `codex/`) store **verbatim LLM output** �
 - **Continuity check:** Verify that the first sentence of a new page continues the last sentence of the previous page.
 
 ### Workflow
-- Work in batches of ~10 pages. After each batch: update `Transkript.txt`, update `raw_mapping.json`, move raw files to `done/`, and **commit**.
-- **Progress output:** When working on multiple pages, give detailed status updates: which page is being read, transcribed, or written. Announce each sub-task (e.g., "Reading scan 016...", "Writing Transkript/016.md...", "Updating Transkript.txt with pages 016-020...", "Committing batch 016-020...").
 - **Always start with the lowest page number not yet transcribed** for each LLM stream.
-- **Incremental updates:** As soon as any single LLM transcription for a page completes, update `Transkript.txt` and `merge_report.md` — do not wait for all three LLMs to finish that page.
+- **After EVERY saved transcription:** (1) fully regenerate `Transkript.txt` from all available transcripts, (2) update `merge_report.md`, (3) **commit immediately**. No exceptions — every single saved transcript triggers a regenerate + commit cycle.
+- **Regenerating `Transkript.txt`:** Use the Python script in Phase 3 to rebuild from scratch every time. Source priority: use merged `Transkript/NNN.md` if it exists, otherwise fall back to `Transkript/claude/NNN.md`. Never append — always regenerate the full file.
+- **Progress output:** Give detailed status updates: which page is being read, transcribed, or written. Announce each sub-task (e.g., "Reading scan 016...", "Writing Transkript/016.md...", "Regenerating Transkript.txt...", "Committing...").
 - **Update CLAUDE.md after every relevant workflow or structural change.**
 
 ### Phase 3: Consolidation (`Transkript/` → `Transkript.txt`)
