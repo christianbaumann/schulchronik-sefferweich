@@ -51,6 +51,8 @@ Details zur LaTeX-Pipeline: siehe [LaTeX.md](LaTeX.md).
 
 Aktuelle Merge-Statistiken: siehe [merge_report.md](merge_report.md).
 
+> **Hinweis zum aktuellen Stand:** Dieses Projekt befindet sich in aktiver Bearbeitung. Die drei eingesetzten KI-Systeme (Claude, Gemini, Codex) unterscheiden sich deutlich in ihrer Fähigkeit, Kurrentschrift zu entziffern — manche liefern sehr gute Ergebnisse, andere haben noch erhebliche Schwächen. Da die Transkription pro KI unterschiedlich weit fortgeschritten ist, kann es vorkommen, dass für eine bestimmte Seite bisher nur die Lesung des schwächsten Systems in der zusammengeführten Fassung steht. Die Qualität einzelner Seiten kann daher derzeit noch stark schwanken. Mit jedem weiteren abgeschlossenen Transkriptionsdurchlauf und dem anschließenden 3-Wege-Abgleich verbessert sich die Gesamtqualität spürbar.
+
 ### Lokaler Build (LaTeX → PDF)
 
 ```bash
