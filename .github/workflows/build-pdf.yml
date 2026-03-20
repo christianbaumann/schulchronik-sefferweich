@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -22,10 +22,37 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Regenerate schulchronik.tex from pages
+        run: python3 latex/generate_main.py
+
+      - name: Commit if changed
+        id: commit
+        run: |
+          git diff --quiet latex/schulchronik.tex && echo "changed=false" >> "$GITHUB_OUTPUT" && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add latex/schulchronik.tex
+          git commit -m "Auto-regenerate schulchronik.tex from pages"
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
   build:
+    needs: regenerate
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Pull latest (in case regenerate committed)
+        run: git pull --ff-only
 
       - name: Build PDF
         uses: xu-cheng/latex-action@v4
