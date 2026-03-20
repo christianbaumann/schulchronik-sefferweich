@@ -1,12 +1,12 @@
-# Schulchronik Sefferweich — Digitale Transkription
+# Schulchronik [Sefferweich](https://www.sefferweich.de) — Digitale Transkription
 
-Transkription der historischen Schulchronik von Sefferweich (Eifelkreis Bitburg-Prüm), handschriftlich in deutscher Kurrentschrift verfasst, mit Einträgen ab 1851 bis Mitte des 20. Jahrhunderts.
+Transkription der historischen Schulchronik von [Sefferweich](https://www.sefferweich.de) (Eifelkreis Bitburg-Prüm), handschriftlich in deutscher Kurrentschrift verfasst, mit Einträgen ab 1851 bis Mitte des 20. Jahrhunderts.
 
 ## Über das Projekt
 
-Die Schulchronik dokumentiert das dörfliche und schulische Leben der Gemeinden Sefferweich, Seffern, Bickendorf und Malbergweich über rund 100 Jahre. Die handschriftlichen Originalseiten werden in einem mehrstufigen Verfahren mit Hilfe von drei KI-Modellen (Claude, Gemini, Codex) unabhängig transkribiert und anschließend per 3-Wege-Merge zu einem konsolidierten Ergebnis zusammengeführt.
+Die Schulchronik dokumentiert das dörfliche und schulische Leben der Gemeinden [Sefferweich](https://www.sefferweich.de), Seffern, Bickendorf und Malbergweich über rund 100 Jahre. Die handschriftlichen Originalseiten werden in einem mehrstufigen Verfahren mit Hilfe von drei KI-Modellen (Claude, Gemini, Codex) unabhängig transkribiert und anschließend per 3-Wege-Merge zu einem konsolidierten Ergebnis zusammengeführt.
 
-Das Projekt ist ein Vorhaben des **Arbeitskreises Geschichte Sefferweich**.
+Das Projekt ist ein Vorhaben des **Arbeitskreises Geschichte [Sefferweich](https://www.sefferweich.de)**.
 
 ## Projektstruktur
 
@@ -52,4 +52,4 @@ Voraussetzung: LuaLaTeX mit `reledmac`-Paket. Die PDF wird auch automatisch per 
 
 ## Lizenz
 
-Dieses Projekt dient der lokalen Geschichtsforschung. Die Originalscans sind Eigentum der Gemeinde bzw. des Arbeitskreises Geschichte Sefferweich.
+Dieses Projekt dient der lokalen Geschichtsforschung. Die Originalscans sind Eigentum der Gemeinde bzw. des Arbeitskreises Geschichte [Sefferweich](https://www.sefferweich.de).
