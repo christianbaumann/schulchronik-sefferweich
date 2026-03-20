@@ -5,13 +5,11 @@ This document covers the LaTeX setup for producing faithful-layout PDF output fr
 ## Architecture
 
 ```
-Transkript/*.md  (triple-LLM transcription — intermediate, lossy layout)
-    │
-    ▼
-latex/pages/*.tex  (LaTeX source — canonical, faithful layout)
-    │
-    └──▶ lualatex  ──▶  PDF  (reledmac marginal notes, full layout)
+Transkript/*.md ──► md2tex.py ──► latex/pages/*.tex ──► generate_main.py ──► lualatex ──► PDF
+                   (automated)     (LaTeX source)       (schulchronik.tex)    (reledmac)
 ```
+
+The full pipeline runs automatically via GitHub Actions on every push to `main`.
 
 Future: HTML via `make4ht`/`lwarp`, EPUB via `tex4ebook` (deferred until PDF template is validated).
 
@@ -171,21 +169,37 @@ Key dependency chain for `reledmac`: requires `xargs`, `suffix` (in `bigfoot` pa
 
 ## Converting Markdown Transcripts to LaTeX
 
-When converting `Transkript/NNN.md` to `latex/pages/NNN.tex`:
+**Automated by `latex/md2tex.py`** — run manually or via GitHub Actions.
 
-1. Start with `\seite{N}` (structural marker, no visible output)
-2. If page starts with a heading: put `\jahresueberschrift{...}` or `\abschnitt{...}` after `\seite`, then `\pstart`. The main file must NOT open `\pstart` before `\input` for such pages.
-3. If page starts with prose: the main file opens `\pstart` before `\input`
-4. Convert left-column text to `\margmark{text}` — use `\\` for line breaks within margin notes
-5. For mid-page headings: `\pend` before heading, `\pstart` after
-6. Replace line breaks between words with `\ob` (space between separate words) or `\ohb` (hyphenated word split across lines)
-7. Replace `[?]` with `\unsicher`
-8. Replace `[darüber: ...]` with `\darueber{...}`
-9. Replace `~~text~~` with `\sout{text}`
-10. Replace `"` repetition marks with `\ditto`
-11. Use `\enquote{text}` for actual quotations
-12. Wrap verse/poetry in `\pend` + `\begin{verse}...\end{verse}` + `\pstart`
-13. End the file with `\pend`
+```bash
+python3 latex/md2tex.py              # Convert all pages
+python3 latex/md2tex.py --page 005   # Convert single page
+python3 latex/md2tex.py --dry-run    # Show what would change
+python3 latex/md2tex.py --validate   # Compare against gold-standard files
+python3 latex/md2tex.py --debug      # Print line classification debug output
+```
+
+### Conversion Rules (applied by md2tex.py)
+
+1. `\seite{N}` — structural marker from centered page number
+2. Page-start headings: `\jahresueberschrift{...}` or `\abschnitt{...}` before `\pstart`
+3. Prose-start pages: no `\pstart` (main file provides it)
+4. Left-column text → `\margmark{text}` with `\\` for multi-line margins
+5. Mid-page headings: `\pend` before, `\pstart` after
+6. Line breaks: `\ob` (word boundary) or `\ohb` (hyphenated break); none on last line of paragraph
+7. `[?]` → `\unsicher` (leading space consumed, `{}` added when followed by letters)
+8. `[darüber: ...]` → `\darueber{...}`
+9. `~~text~~` → `\sout{text}`
+10. `„text"` → `\enquote{text}`
+11. Abbreviation periods: `Joh. ` → `Joh.\ ` (prevents TeX sentence-end spacing)
+12. Verse/poetry → `\pend` + `\begin{verse}...\end{verse}` + `\pstart`
+13. End file with `\pend`
+
+### Special Pages
+
+- **Page 002 (title page):** Hand-crafted `.tex` preserved as-is (tabular structure with ditto marks)
+- **Page 000 (cover):** Simple centered layout, auto-generated
+- **Gold standard:** `latex/gold/` contains reference `.tex` files for regression testing
 
 ## References
 
