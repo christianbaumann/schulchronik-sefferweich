@@ -1,6 +1,6 @@
 # Schulchronik Sefferweich — Digitale Transkription
 
-Transkription der historischen Schulchronik von Sefferweich (Kreis Bitburg, Eifel), handschriftlich in deutscher Kurrentschrift verfasst, mit Einträgen ab 1851 bis Mitte des 20. Jahrhunderts.
+Transkription der historischen Schulchronik von Sefferweich (Eifelkreis Bitburg-Prüm), handschriftlich in deutscher Kurrentschrift verfasst, mit Einträgen ab 1851 bis Mitte des 20. Jahrhunderts.
 
 ## Über das Projekt
 
@@ -34,7 +34,7 @@ Details zur LaTeX-Pipeline: siehe [LaTeX.md](LaTeX.md).
 
 ## Fortschritt
 
-- **Umfang:** 110 Seiten (001–110)
+- **Umfang:** 110 Seiten (scannen der Chronik ist in Arbeit)
 - **Claude-Transkriptionen:** 005–044
 - **Gemini-Transkriptionen:** 005–014, 021–028, 031–039
 - **Codex-Transkriptionen:** 005–006, 011–012, 021–022, 036–038
