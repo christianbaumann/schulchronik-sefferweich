@@ -6,6 +6,7 @@ on:
     paths:
       - 'latex/**'
       - 'Scans/embedded/**'
+      - 'Transkript/*'
   workflow_dispatch:
 
 # Only allow one deployment at a time
