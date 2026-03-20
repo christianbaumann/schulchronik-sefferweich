@@ -1,0 +1,116 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project Overview
+
+This repository contains the transcription of the historical "Schulchronik" (School Chronicle) of Sefferweich, Kreis Bitburg, spanning from 1851 through the mid-20th century. The chronicle is handwritten in Sütterlin/Kurrent script. The project digitizes these scans into structured text.
+
+## Three-Phase Transcription Pipeline
+
+### Phase 1: Preparation (`Scans/raw/` → `Scans/`)
+- Raw photos in `Scans/raw/` are sorted by filename (timestamp-based ordering corresponds to page order).
+- Files are renamed to sequential format (`011.jpg`, `012.jpg`, etc.) and placed in `Scans/`.
+- `Scans/raw/` file index 0 corresponds to page 011.
+- **Inverted scans:** If a scan is upside down (180° rotated), rotate the source file first (e.g., using `sips --rotate 180`), then re-copy to `Scans/` and re-transcribe. Do not attempt to transcribe inverted scans — rotate first.
+- After copying, processed raw files are moved to `Scans/raw/done/`.
+- The mapping from numbered scan to original raw filename is kept in `Scans/raw_mapping.json`. **Keep this file updated** when adding new pages.
+
+### Phase 2: Triple-LLM Transcription (`Scans/` → `Transkript/`)
+
+Every page is independently transcribed by **three LLMs** (Claude, Gemini, Codex), then merged by Claude into a definitive result using cautious 3-way voting with sanity checks.
+
+**Exception:** Pages 002–004 have no scans available — they retain their original Gemini-only transcripts and are not re-transcribed.
+
+#### Folder Structure
+```
+Transkript/
+├── claude/NNN.md    # Claude's raw transcription (005–044)
+├── gemini/NNN.md    # Gemini's raw transcription (005–044)
+├── codex/NNN.md     # Codex's raw transcription (005–044)
+├── NNN.md           # Merged final transcript (002–044)
+└── ...
+```
+
+Raw subfolders (`claude/`, `gemini/`, `codex/`) store **verbatim LLM output** — no reformatting.
+
+#### Phase 2a: Claude Transcription (`Scans/` → `Transkript/claude/`)
+- Claude reads each scan and produces a full transcription in standard format.
+- Use subagents to parallelize.
+
+#### Phase 2b: Gemini Transcription (`Scans/` → `Transkript/gemini/`)
+- **Gemini CLI invocation:**
+  ```bash
+  gemini -m gemini-2.5-pro -p "Transkribiere den Text als Markdown. Versuche das Layout beizubehalten. Sprache ist deutsch. Schrift ist Sütterlin oder Kurrent. Füge am Anfang Hinweise zur Transkription hinzu und am Ende historische Erläuterungen. @Scans/NNN.jpg" -o text
+  ```
+- Timeout: 5 minutes per call.
+
+#### Phase 2c: Codex Transcription (`Scans/` → `Transkript/codex/`)
+- **Codex CLI invocation:**
+  ```bash
+  codex exec -i Scans/NNN.jpg -m gpt-5.4 -s read-only --ephemeral "Transkribiere den Text als Markdown. Versuche das Layout beizubehalten. Sprache ist deutsch. Schrift ist Sütterlin oder Kurrent. Füge am Anfang Hinweise zur Transkription hinzu und am Ende historische Erläuterungen." -o /tmp/codex_NNN.md
+  ```
+- Timeout: 5 minutes per call.
+
+#### Parallelization Strategy
+- **Gemini and Codex calls for different pages run in parallel** via subagents — different providers, no shared rate limits.
+- **Claude transcriptions** run in parallel via subagents (no external rate limits).
+- **All three LLMs for the same page can run concurrently** since they are independent.
+- Use subagents to maximize throughput: one subagent per LLM×page combination where possible.
+
+#### Phase 2d: 3-Way Merge (`claude/ + gemini/ + codex/` → `Transkript/`)
+- Claude reads all three raw transcriptions + the scan, performs word-by-word 3-way comparison using Tiers 0–8:
+  - **Tier 0:** 3-way agreement → accept
+  - **Tier 1:** 2-of-3 majority → sanity check (real word? context fit? dissenter better? Sütterlin confusion pair?) → accept or reject
+  - **Tiers 2–6:** Handle uncertainty markers, real-word vs. non-word, confusion matrix, layout, hallucination
+  - **Tier 7:** Merge notes/analysis from all three into Hinweise and Analyse sections
+  - **Tier 8:** Irreconcilable conflicts → flag in Hinweise with `**Abweichende Lesarten:**`
+- Writes merged `Transkript/NNN.md` in standard format.
+- Updates `merge_report.md` with per-page statistics.
+
+#### Merge Report
+- `merge_report.md` (project root) tracks per-page 3-way merge statistics and human review flags.
+- **Language:** `merge_report.md` is written in German.
+- Pages where confidence is low are flagged for human review in both the merge report and the Hinweise section.
+
+#### Rate Limit Handling
+- Check output after each Gemini/Codex call for "Rate Limit" or suspiciously short output (< 50 chars).
+- On trigger: **HALT all processing** (including other models). Parse the wait time from the error response and sleep for that duration.
+- If no wait time is provided, fall back to probing at 10-minute intervals.
+- Log all rate limit events in `merge_report.md` Rate Limit Log section.
+
+#### Required structure of each merged `.md` file:
+  1. **Hinweise zur Transkription** — issues, hard-to-read passages, contradictions. Stick to factual observations only; do not add advisory comments like "hier ist eine Überprüfung ratsam" or similar recommendations. Include 1-3 German-language web links per bullet where applicable — not only for historical facts (dates, persons, events) but also for uncommon/archaic knowledge (old units of measurement, forgotten customs, obsolete terms, etc.).
+  2. **Transcription block** — inside a `` ```text `` code block to preserve spatial layout (marginalia, indentations).
+  3. **Historische und sprachliche Analyse** (preceded by `***`) — fact-checked annotations (100% accuracy required), 2-3 web links to reliable German sources, linguistic explanations for archaic terms.
+- **Continuity check:** Verify that the first sentence of a new page continues the last sentence of the previous page.
+
+### Workflow
+- Work in batches of ~10 pages. After each batch: update `Transkript.txt`, update `raw_mapping.json`, move raw files to `done/`, and **commit**.
+- **Progress output:** When working on multiple pages, give detailed status updates: which page is being read, transcribed, or written. Announce each sub-task (e.g., "Reading scan 016...", "Writing Transkript/016.md...", "Updating Transkript.txt with pages 016-020...", "Committing batch 016-020...").
+- **Use subagents** to parallelize writing of transcript files when transcribing batches of pages. Read all scans first, then spawn subagents to write multiple transcript files concurrently.
+- **Update CLAUDE.md after every relevant workflow or structural change.**
+
+### Phase 3: Consolidation (`Transkript/` → `Transkript.txt`)
+- Extract text from inside the `` ```text `` code blocks only (strip AI wrapper/metadata).
+- Separate page sections with `------------`.
+- Output is `Transkript.txt` — a seamless plain-text reconstruction of the entire chronicle.
+
+## Transcription Conventions
+
+- `"` (double quotes) = repetition marks for words like "Fortgesetzt von" or "Lehrer".
+- `[?]` = illegible or unclear text. Use sparingly: only when genuinely unsure (<80% confidence). If the word can be reasonably guessed from context, write it without `[?]`.
+- `[darüber: ...]` = text written above the line as a correction/addition.
+- `~~text~~` = struck-through text in the original.
+- Marginal notes are placed at the left side of the text block, matching the original layout.
+- **Embedded images** (e.g., Totenzettel, photos, documents): Extract each image individually into `Scans/embedded/` with naming `{page}_{index}.jpg` (e.g., `031_1.jpg`, `031_2.jpg`). Use Python/Pillow for precise cropping. **Quality-check** each extracted image by reading it back. Link from the transcript using `![description](../Scans/embedded/031_1.jpg)`.
+
+## LaTeX Publishing Pipeline
+
+See **[LaTeX.md](LaTeX.md)** for the complete LaTeX setup: build instructions, custom commands, layout toggles, lessons learned, and the Markdown→LaTeX conversion guide.
+
+## Key Locations
+
+- Historical context: villages Sefferweich, Seffern, Bickendorf, Malbergweich (all Kreis Bitburg/Eifel region).
+- **No links needed for villages/towns within ~15 km of Sefferweich** (e.g., Fließem, Dudeldorf, Bickendorf, Schleid, Heilenbach, Idenheim, Schönecken, etc.) — these are local and need no Wikipedia reference.
+- The Gemini conversation used during initial transcription is linked in `gemini_link.txt`.

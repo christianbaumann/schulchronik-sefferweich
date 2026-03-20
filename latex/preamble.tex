@@ -1,0 +1,160 @@
+% === Schulchronik Sefferweich — Preamble ===
+% Compiled with: lualatex
+
+\documentclass[11pt, a4paper, oneside, openany]{scrbook}
+
+% === Language ===
+\usepackage[ngerman]{babel}
+% Disable babel shorthand for " so it can be used as ditto/repetition mark
+\useshorthands*{"}
+\addto\extrasgerman{\languageshorthands{none}}
+\addto\extrasngerman{\languageshorthands{none}}
+
+% === Fonts ===
+\usepackage{fontspec}
+\setmainfont{EB Garamond}[
+  Numbers=OldStyle,
+]
+
+% Toggle: Fraktur for major headings
+\newif\iffrakturheadings
+\frakturheadingsfalse  % default: EB Garamond throughout
+% \frakturheadingstrue
+\iffrakturheadings
+  \newfontfamily\frakfont{UnifrakturMaguntia}
+\else
+  \newcommand{\frakfont}{}
+\fi
+
+% === Layout toggles ===
+\newif\iforiginallbreaks
+\originallbreaksfalse       % default: LaTeX re-flows text
+% \originallbreakstrue      % preserve exact manuscript line breaks
+
+\newif\iforiginalpagebreaks
+\originalpagebreaksfalse    % default: LaTeX flows pages naturally
+% \originalpagebreakstrue   % force page break at manuscript boundaries
+
+\newif\ifannotations
+\annotationstrue            % default: show Hinweise + Analyse
+% \annotationsfalse         % clean reading edition
+
+\newif\ifendnotes
+\endnotesfalse              % default: per-page footnotes
+% \endnotestrue             % collect as endnotes
+
+% === Packages ===
+\usepackage[normalem]{ulem}       % \sout{} strikethrough
+\usepackage{graphicx}              % \includegraphics
+\usepackage{csquotes}              % German quotation marks
+\usepackage[series={A}, noend, noeledsec, nofamiliar, noledgroup]{reledmac}
+
+% === reledmac configuration ===
+\sidenotemargin{left}
+\renewcommand{\ledlsnotefontsetup}{\footnotesize\itshape}
+\setlength{\marginparwidth}{3.5cm}
+\setlength{\marginparsep}{0.5cm}
+
+% Disable line numbering (original manuscript has none)
+\firstlinenum{10000}
+\linenumincrement{10000}
+
+% === Page geometry ===
+\usepackage[
+  a4paper,
+  left=5cm,          % wide left margin for margin notes
+  right=2.5cm,
+  top=3cm,
+  bottom=3cm,
+  marginparwidth=3.5cm,
+  marginparsep=0.5cm
+]{geometry}
+
+% Suppress automatic page numbering (manuscript page numbers shown via \seite{})
+\pagestyle{empty}
+
+% === Custom commands: Schulchronik conventions ===
+
+% Margin note (everything in left column of original)
+\newcommand{\margmark}[1]{\ledleftnote{#1}}
+
+% Ditto / repetition mark (used in original as " for repeated words)
+\newcommand{\ditto}{\textquotedbl}
+
+% Interlinear correction: [darüber: text]
+\newcommand{\darueber}[1]{\textsuperscript{\scriptsize[darüber: #1]}}
+
+% Uncertainty marker: [?]
+\newcommand{\unsicher}{\,[?]}
+
+% Manuscript page marker (structural only — no visible output)
+% The page numbers in the scans were added retrospectively and are not part of the original.
+% Use in page files for documentation; does not produce output.
+\newcommand{\seite}[1]{}
+
+% Heading (centered, italic) — used for all headings (year, section, etc.)
+% Must appear between \pend and \pstart in the calling code.
+% Omit trailing "." from heading text.
+\newcommand{\ueberschrift}[1]{%
+  \bigskip
+  \begin{center}
+    \iffrakturheadings{\frakfont\Large #1}%
+    \else{\Large\textit{#1}}%
+    \fi
+  \end{center}
+}
+
+% Legacy aliases
+\newcommand{\jahresueberschrift}[1]{\ueberschrift{#1}}
+\newcommand{\abschnitt}[1]{\ueberschrift{#1}}
+
+% Title page heading with underline
+\newcommand{\titelseite}[1]{%
+  \begin{center}
+    \iffrakturheadings{\frakfont\LARGE #1}%
+    \else{\LARGE\textbf{#1}}%
+    \fi
+    \par\noindent\rule{8cm}{0.4pt}
+  \end{center}
+}
+
+% Conditional line break: only active when preserving original breaks
+% In reflow mode, produces a space to prevent words running together
+\newcommand{\ob}{\iforiginallbreaks\\\else\space\fi}
+
+% Original hyphenated break: for words split by a hyphen across lines
+% In reflow mode, word rejoins (no hyphen, no space): "An\ohb siedlung" → "Ansiedlung"
+% In original-break mode, produces hyphen + linebreak: "An-\\"
+\newcommand{\ohb}{\iforiginallbreaks-\\\fi}
+
+% Original page break marker (visual + optional forced break)
+\newcommand{\originalpagebreak}{%
+  \iforiginalpagebreaks\clearpage%
+  \else\par\medskip\noindent\hfil\rule{3cm}{0.2pt}\hfil\par\medskip%
+  \fi
+}
+
+% Horizontal rule (decorative separator in original)
+\newcommand{\trenner}{\par\medskip\noindent\rule{\textwidth}{0.4pt}\par\medskip}
+
+% Vertical emphasis line (rare, e.g., page 008)
+\newcommand{\emphmargin}[1]{%
+  \noindent\hspace{-1em}\rule[-\dp\strutbox]{1pt}{\baselineskip}\hspace{0.5em}#1%
+}
+
+% Annotation blocks (Hinweise, Analyse)
+\newcommand{\hinweise}[1]{%
+  \ifannotations
+    \ifendnotes\endnote{#1}%
+    \else\footnote{#1}%
+    \fi
+  \fi
+}
+
+\newcommand{\analyse}[1]{%
+  \ifannotations
+    \ifendnotes\endnote{#1}%
+    \else\footnote{#1}%
+    \fi
+  \fi
+}
