@@ -1,14 +1,20 @@
 # Schulchronik [Sefferweich](https://www.sefferweich.de) — Digitale Transkription
 
-Transkription der historischen Schulchronik von [Sefferweich](https://www.sefferweich.de) (Eifelkreis Bitburg-Prüm), handschriftlich in deutscher Kurrentschrift verfasst, mit Einträgen ab 1851 bis Mitte des 20. Jahrhunderts.
+In der Gemeinde [Sefferweich](https://www.sefferweich.de) (Eifelkreis Bitburg-Prüm) existiert eine handgeschriebene Schulchronik aus dem 19. und 20. Jahrhundert. Generationen von Lehrern haben darin das Leben in den Dörfern [Sefferweich](https://www.sefferweich.de), Seffern, Bickendorf und Malbergweich festgehalten — von Schulalltag und Wetter über Ernten und Epidemien bis hin zu Kriegen und politischen Umbrüchen. Die ältesten Einträge stammen aus dem Jahr 1851.
 
-## Über das Projekt
+Die Chronik ist in *Kurrentschrift* verfasst, einer alten deutschen Handschrift, die heute kaum noch jemand lesen kann. Um den Inhalt zugänglich zu machen, wird der Text mit Hilfe von künstlicher Intelligenz entziffert und in eine moderne, lesbare Form gebracht.
 
-Die Schulchronik dokumentiert das dörfliche und schulische Leben der Gemeinden [Sefferweich](https://www.sefferweich.de), Seffern, Bickendorf und Malbergweich über rund 100 Jahre. Die handschriftlichen Originalseiten werden in einem mehrstufigen Verfahren mit Hilfe von drei KI-Modellen (Claude, Gemini, Codex) unabhängig transkribiert und anschließend per 3-Wege-Merge zu einem konsolidierten Ergebnis zusammengeführt.
+## Wie funktioniert das?
+
+Als Vorlage dient eine Fotokopie der Originalchronik. Die einzelnen Seiten werden mit [Google Fotoscanner](https://www.google.com/intl/de/photos/scan/) digitalisiert und dann von **drei verschiedenen KI-Systemen** unabhängig voneinander gelesen (Claude von Anthropic, Gemini von Google und Codex von OpenAI). Jedes System liefert seine eigene Lesung — und wie bei drei unabhängigen Zeugen lassen sich die Ergebnisse anschließend vergleichen: Wo alle drei übereinstimmen, ist der Text so gut wie sicher. Wo sie voneinander abweichen, wird anhand des Originalfotos geprüft, welche Lesung am plausibelsten ist. Stellen, die auch nach diesem Abgleich unklar bleiben, werden als unsicher markiert.
+
+Aus den zusammengeführten Ergebnissen entsteht am Ende ein durchsuchbarer Gesamttext sowie eine druckfertige PDF-Ausgabe.
 
 Das Projekt ist ein Vorhaben des **Arbeitskreises Geschichte [Sefferweich](https://www.sefferweich.de)**.
 
-## Projektstruktur
+## Technische Details
+
+### Projektstruktur
 
 ```
 Scans/                  Digitalisierte Originalseiten (JPG)
@@ -21,7 +27,7 @@ latex/                  LaTeX-Quellen für PDF-Ausgabe
 merge_report.md         Merge-Statistiken und Prüfhinweise
 ```
 
-## Pipeline
+### Pipeline
 
 1. **Scan-Vorbereitung** — Rohfotos werden sortiert, nummeriert und in `Scans/` abgelegt.
 2. **Triple-LLM-Transkription** — Jede Seite wird unabhängig von Claude, Gemini und Codex transkribiert.
@@ -32,7 +38,7 @@ merge_report.md         Merge-Statistiken und Prüfhinweise
 Details zu Pipeline, Transkriptionskonventionen und Merge-Verfahren: siehe [CLAUDE.md](CLAUDE.md).
 Details zur LaTeX-Pipeline: siehe [LaTeX.md](LaTeX.md).
 
-## Fortschritt
+### Fortschritt
 
 - **Umfang:** 110 Seiten (scannen der Chronik ist in Arbeit)
 - **Claude-Transkriptionen:** 005–044
@@ -42,7 +48,7 @@ Details zur LaTeX-Pipeline: siehe [LaTeX.md](LaTeX.md).
 
 Aktuelle Merge-Statistiken: siehe [merge_report.md](merge_report.md).
 
-## Lokaler Build (LaTeX → PDF)
+### Lokaler Build (LaTeX → PDF)
 
 ```bash
 cd latex && make pdf
