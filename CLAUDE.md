@@ -86,7 +86,7 @@ Raw subfolders (`claude/`, `gemini/`, `codex/`) store **verbatim LLM output** �
 
 ### Workflow
 - **Always start with the lowest page number not yet transcribed** for each LLM stream.
-- **After EVERY saved LLM transcription:** (1) update the merged transcript `Transkript/NNN.md` for that page, (2) fully regenerate `Transkript.txt`, (3) **commit and push immediately**. No exceptions.
+- **After EVERY saved LLM transcription:** (1) update the merged transcript `Transkript/NNN.md` for that page, (2) fully regenerate `Transkript.txt`, (3) **commit and push immediately**. No exceptions. **Do NOT skip the merge update** even if the new transcript "confirms" an existing one — a 2-way or 3-way merge always produces a better result than a single-LLM transcript.
 - **Updating merged transcripts (`Transkript/NNN.md`):** Whenever a new raw LLM transcript is saved, update the corresponding merged file:
   - **3 LLMs available:** Perform proper 3-way merge (Tiers 0–8, read scan + all 3 transcripts).
   - **2 LLMs available:** Perform 2-way comparison with scan verification.

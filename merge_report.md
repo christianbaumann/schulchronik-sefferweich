@@ -10,11 +10,12 @@
 | 022   | ~15%                   | ~60%               | ~5%                | ~20%            | 1                | Codex gescheitert; Gemini klar stärkste Transkription; viele Korrekturen vs Claude-only (Schuljahr, Schulfeiern, 50 Häuser) |
 | 036   | ~55%                   | ~25%               | ~5%                | ~15%            | 3                | Überschrift von Gemini/Codex falsch gelesen („Jammerstimmung" statt „Einweihung"); Codex viele [unleserlich]; Ortsname Dusemond vs. Düsseldorf |
 | 037   | ~70%                   | ~20%               | ~3%                | ~7%             | 1                | Gute Übereinstimmung bei Ernte-Abschnitt; „Nisten" nur von Claude erkannt; Codex hat Konversationstext am Ende |
+| 017   | —                      | —                  | —                  | —               | 1                | 2-Wege-Merge (Claude + Codex, Gemini fehlt). Sehr hohe Übereinstimmung; Codex markiert „C. Engen" und „Submittenten" als unsicher; Bürgermeister-Passage schwer lesbar |
 | 038   | ~50%                   | ~25%               | ~5%                | ~20%            | 4                | Codex >70% unleserlich; Revisionsdaten divergieren; Schülerzahl 60 vs. 29; Entlassungen: nur Knaben oder auch Mädchen? |
 
 ## Zusammenfassung
 
-- Seiten zusammengeführt: 9 (005–006, 011–012, 021–022, 036–038)
+- Seiten zusammengeführt: 10 (005–006, 011–012, 017, 021–022, 036–038)
 - Gesamtumfang: 110 Seiten (001–110); Triple-LLM gilt für 002–110 (001 = Deckblatt, kein Text)
 - Durchschn. 3-Wege-Übereinstimmung: ~39%
 - Durchschn. 2-von-3 akzeptiert (Plausibilitätsprüfung bestanden): ~36%
@@ -37,7 +38,7 @@
 |--------|-------------------------------------------|-----------------------------------------------------------|
 | Claude | 005–061 (57 Seiten)                       | 002–004 (Scans jetzt verfügbar); 062–110 (neu)           |
 | Gemini | 005–015, 021–028, 031–039 (28 Seiten)     | 016–020, 029–030, 040–044; auch 002–004, 045–110         |
-| Codex  | 005–007, 011–012, 021–022, 036–038 (10 Seiten) | 008–010, 013–020, 023–030, 031–035, 039–044; auch 002–004, 045–110 |
+| Codex  | 005–007, 011–012, 017, 021–022, 036–038 (11 Seiten) | 008–010, 013–016, 018–020, 023–030, 031–035, 039–044; auch 002–004, 045–110 |
 
 ## Rate-Limit-Protokoll
 
