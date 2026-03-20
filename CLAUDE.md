@@ -20,15 +20,15 @@ This repository contains the transcription of the historical "Schulchronik" (Sch
 
 Every page is independently transcribed by **three LLMs** (Claude, Gemini, Codex), then merged by Claude into a definitive result using cautious 3-way voting with sanity checks.
 
-**Exception:** Pages 002–004 have no scans available — they retain their original Gemini-only transcripts and are not re-transcribed.
+**Exception:** Pages 002–004 currently retain their original Gemini-only transcripts (scans now available — will be re-transcribed in the triple-LLM pipeline).
 
 #### Folder Structure
 ```
 Transkript/
-├── claude/NNN.md    # Claude's raw transcription (005–044)
-├── gemini/NNN.md    # Gemini's raw transcription (005–044)
-├── codex/NNN.md     # Codex's raw transcription (005–044)
-├── NNN.md           # Merged final transcript (002–044)
+├── claude/NNN.md    # Claude's raw transcription (005–054 done, 055–110 in progress)
+├── gemini/NNN.md    # Gemini's raw transcription (005–014, 021–028, 031–039 done)
+├── codex/NNN.md     # Codex's raw transcription (005–006, 011–012, 021–022, 036–038 done)
+├── NNN.md           # Merged final transcript (002–044 exist; 005–006, 011–012, 021–022, 036–038 are proper 3-way merges)
 └── ...
 ```
 
