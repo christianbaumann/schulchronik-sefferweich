@@ -81,6 +81,14 @@
 % Ditto / repetition mark (used in original as " for repeated words)
 \newcommand{\ditto}{\textquotedbl}
 
+% Aligned ditto mark: centers " in a box the width of the repeated word
+% Usage: \dittomark{Fortgesetzt} → " centered in box width of "Fortgesetzt"
+\newlength{\dittoLen}
+\newcommand{\dittomark}[1]{%
+  \settowidth{\dittoLen}{#1}%
+  \makebox[\dittoLen][c]{\textquotedbl}%
+}
+
 % Interlinear correction: [darüber: text]
 \newcommand{\darueber}[1]{\textsuperscript{\scriptsize[darüber: #1]}}
 
