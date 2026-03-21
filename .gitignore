@@ -17,6 +17,9 @@ LaTeX/*.fdb_latexmk
 # Python
 __pycache__/
 
+# Claude Code runtime artifacts
+.claude/.claude/
+
 # OS files
 .DS_Store
 
