@@ -99,6 +99,35 @@ jobs:
           name: report
           path: transkriptionsbericht.pdf
 
+  # ── Store PDFs in repo ──────────────────────────────────────────
+  store-pdfs:
+    needs: [build-chronik, build-report]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Download Chronik PDF
+        uses: actions/download-artifact@v4
+        with:
+          name: chronik
+          path: pdf
+
+      - name: Download report PDF
+        uses: actions/download-artifact@v4
+        with:
+          name: report
+          path: pdf
+
+      - name: Commit PDFs if changed
+        run: |
+          git add pdf/
+          git diff --cached --quiet && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update generated PDFs [skip ci]"
+          git pull --rebase
+          git push
+
   # ── Assemble & deploy to GitHub Pages ───────────────────────────
   deploy:
     needs: [build-chronik, build-report]
