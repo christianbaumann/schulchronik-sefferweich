@@ -12,6 +12,7 @@
 | 037   | ~70%                   | ~20%               | ~3%                | ~7%             | 1                | Gute Übereinstimmung bei Ernte-Abschnitt; „Nisten" nur von Claude erkannt; Codex hat Konversationstext am Ende |
 | 017   | —                      | —                  | —                  | —               | 1                | 2-Wege-Merge (Claude + Codex, Gemini fehlt). Sehr hohe Übereinstimmung; Codex markiert „C. Engen" und „Submittenten" als unsicher; Bürgermeister-Passage schwer lesbar |
 | 038   | ~50%                   | ~25%               | ~5%                | ~20%            | 4                | Codex >70% unleserlich; Revisionsdaten divergieren; Schülerzahl 60 vs. 29; Entlassungen: nur Knaben oder auch Mädchen? |
+| 023   | ~20%                   | ~50%               | ~5%                | ~25%            | 1                | Claude-Lesung durchgehend unzuverlässig; Gemini/Codex-Mehrheit für oberen Teil; Gemini allein beste Lesung für Wasserabschnitt; untere Zeilen teilweise unleserlich |
 
 ## Zusammenfassung
 
@@ -36,9 +37,9 @@
 
 | LLM    | Seiten fertig                             | Seiten fehlend                                            |
 |--------|-------------------------------------------|-----------------------------------------------------------|
-| Claude | 005–065 (61 Seiten)                       | 002–004 (Scans jetzt verfügbar); 066–110 (neu)           |
+| Claude | 005–070 (66 Seiten)                       | 002–004 (Scans jetzt verfügbar); 071–110 (neu)           |
 | Gemini | 005–015, 021–028, 031–039 (28 Seiten)     | 016–020, 029–030, 040–044; auch 002–004, 045–110         |
-| Codex  | 005–009, 011–012, 017, 021–022, 036–038 (13 Seiten) | 010, 013–016, 018–020, 023–030, 031–035, 039–044; auch 002–004, 045–110 |
+| Codex  | 005–009, 011–012, 017, 021–023, 036–038 (14 Seiten) | 010, 013–016, 018–020, 024–030, 031–035, 039–044; auch 002–004, 045–110 |
 
 ## Rate-Limit-Protokoll
 
@@ -54,3 +55,6 @@
 | 2026-03-20  | Codex  | 008   | Seite 008 erfolgreich transkribiert. |
 | 2026-03-20  | Claude | 062–065 | Seiten 062–065 erfolgreich transkribiert und als Merged-Files gespeichert. |
 | 2026-03-20  | Codex  | 009   | Seite 009 erfolgreich transkribiert. |
+| 2026-03-21  | Gemini | 017   | QUOTA_EXHAUSTED — „Reset nach 8h20m". Gemini-Verarbeitung gestoppt. |
+| 2026-03-21  | Codex  | 023   | Seite 023 erfolgreich transkribiert. 3-Wege-Merge mit Claude+Gemini durchgeführt. |
+| 2026-03-21  | Claude | 070   | Seite 070 erfolgreich transkribiert. Als Merged-File gespeichert (Claude-only). |
