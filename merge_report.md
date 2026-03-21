@@ -36,11 +36,11 @@
 | 085   | —                      | —                  | —                  | —               | 3                | Claude-only. Wahlergebnisse 1928 (historisch wertvoll), Stallbrand, Glockenankunft. Wahltabelle gut lesbar, Brandpassage unsicher. |
 | 086   | —                      | —                  | —                  | —               | 3                | Claude-only. Glockenweihe, Firma Mabilon & Co. Saarburg. Glockenbeschreibungen und Inschriften teilweise unsicher. |
 | 039   | —                      | ~55%               | ~5%                | ~40%            | 3                | 3-Wege-Merge. Codex halluziniert (anderer Texttyp). Effektiv Claude+Gemini. Ernte, Revision, Einquartierung. |
-| 040   | —                      | ~60%               | ~5%                | ~35%            | 2                | 3-Wege-Merge. Codex schwach (1905/06). Gemini stark (BGB 1900, Gewerbeordnung). Claude bestätigt. |
-| 041   | —                      | ~55%               | ~5%                | ~40%            | 2                | 3-Wege-Merge. Codex kontaminiert (Seite 029 statt 041). Effektiv Claude+Gemini. Schulrevisionen 1888/89. |
-| 042   | —                      | ~60%               | ~5%                | ~35%            | 2                | 3-Wege-Merge. Codex halluziniert (Kanzleidokument 1816). Effektiv Claude+Gemini. Lehrerwechsel Dezember 1898, Raskop, Schauff→Schax. |
-| 043   | —                      | ~55%               | ~5%                | ~40%            | 3                | 3-Wege-Merge. Codex halluziniert (Gerichtsverhandlung 1829). Effektiv Claude+Gemini. Schullehrer-Dienstländereien 1869, Lehrer Keil. |
-| 044   | —                      | ~55%               | ~5%                | ~40%            | 3                | 3-Wege-Merge. Codex halluziniert (Kirchendokument). Effektiv Claude+Gemini. Spaziergang, Ernte, Kartoffelfäule. |
+| 040   | —                      | —                  | —                  | —               | 3                | Claude-only + Scan-Verifizierung. Gemini kontaminiert (BGB 1900 statt 1905), gelöscht. Codex schwach (1905/06). Oktober-Revision, Kaisergeburtstagsfeier, Schuljahr 1905/06. |
+| 041   | —                      | —                  | —                  | —               | 3                | Claude-only + Scan-Verifizierung. Gemini kontaminiert (1888 statt 1906), gelöscht. Codex kontaminiert (Seite 029). Mai-Revision, Fronleichnam, Einquartierung Dragoner. |
+| 042   | —                      | —                  | —                  | —               | 3                | Claude-only + Scan-Verifizierung. Gemini kontaminiert (1898 statt 1906), gelöscht. Codex halluziniert (Kanzleidokument 1816). Januar-Revision, Kaisergeburtstag, Lehrerwechsel. |
+| 043   | —                      | —                  | —                  | —               | 4                | Claude-only + Scan-Verifizierung. Gemini kontaminiert (1869 statt 1907), gelöscht. Codex halluziniert (Gerichtsverhandlung 1829). Spaziergang Kyllburg, Ernte, Schuljahr 1907-08. |
+| 044   | —                      | —                  | —                  | —               | 4                | Claude-only + Scan-Verifizierung. Gemini kontaminiert (1899/1900 statt 1908), gelöscht. Codex halluziniert (Kirchendokument). Spaziergang, Ernte, Kartoffelfäule. |
 | 045   | —                      | ~65%               | ~5%                | ~30%            | 2                | 2-Wege-Merge (Claude + Gemini). Kriegerdenkmal 1928, Lehrerwechsel Theis→Gierten, Zweiklassige Schule ab Oktober 1928. |
 | 087   | —                      | —                  | —                  | —               | 2                | Claude-only. Kapellenreparaturen Juni, Erntebericht August, Herbstferien September, Jahresbilanz November. Küster Peter Manns gewürdigt. |
 
@@ -69,7 +69,7 @@
 | LLM    | Seiten fertig                                                       | Seiten fehlend                                            |
 |--------|---------------------------------------------------------------------|-----------------------------------------------------------|
 | Claude | 002–088 (87 Seiten)                                                 | 089–110 (22 Seiten) — **pausiert**                       |
-| Gemini | 005–019, 020, 021–028, 029–030, 031–039, 040–045, 082 (41 Seiten)  | 046–081, 083–110                                         |
+| Gemini | 005–020, 021–028, 029–030, 031–039, 045, 082 (36 Seiten)           | 040–044, 046–081, 083–110 (040–044: kontaminiert, gelöscht) |
 | Codex  | 005–033, 034–035, 036–038, 039–044, 082–083 (42 Seiten)            | 045–081, 084–110                                         |
 
 ## Rate-Limit-Protokoll
@@ -99,3 +99,4 @@
 | 2026-03-21  | Gemini | 020,029-030,040-045 | Batch-Transkription erfolgreich (9 Seiten). Gemini versuchte mehrfach Dateien zu schreiben (write_file-Fehler), gab Text dann als Ausgabe zurück. |
 | 2026-03-21  | Codex  | 034-035,039-044 | Batch-Transkription (8 Seiten). Qualität durchgehend schlecht: >70% [unleserlich], mehrere Seiten halluziniert (falsche Inhalte). Isolation via /tmp/codex_isolated_NNN/ verbesserte Seitenzuordnung, aber Codex 041 trotzdem kontaminiert (las /tmp-Dateien). |
 | 2026-03-21  | Claude | —     | Claude-Transkription auf Benutzerwunsch pausiert. Nur Merges durchgeführt. |
+| 2026-03-21  | Gemini | 040–044 | Kontaminierte Transkripte gelöscht. Gemini-Isolation über /tmp gescheitert — Gemini las Scans aus dem Projektverzeichnis und transkribierte falsche Seiten. Merges auf Claude-only + Scan-Verifizierung zurückgesetzt. |
