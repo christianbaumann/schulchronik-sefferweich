@@ -23,6 +23,11 @@
 | 036   | ~55%                   | ~25%               | ~5%                | ~15%            | 3                | Überschrift von Gemini/Codex falsch gelesen („Jammerstimmung" statt „Einweihung"); Codex viele [unleserlich]; Ortsname Dusemond vs. Düsseldorf |
 | 037   | ~70%                   | ~20%               | ~3%                | ~7%             | 1                | Gute Übereinstimmung bei Ernte-Abschnitt; „Nisten" nur von Claude erkannt; Codex hat Konversationstext am Ende |
 | 017   | ~60%                   | ~25%               | ~5%                | ~10%            | 2                | 3-Wege-Merge (Claude + Codex + Gemini). Bürgermeister-Passage: Gemini-Lesung „Bürgermeister Spang dieses Amt" trotz 2-von-3-Minderheit bevorzugt (grammatisch korrekt). Geburtsort/Datum: Fließem/31.1. (2-von-3) vs. Coblenz/21.1. (Gemini). |
+| 020   | —                      | ~70%               | ~5%                | ~25%            | 1                | 3-Wege-Merge (Claude + Gemini + Codex). Gute Übereinstimmung Claude/Gemini; Codex bestätigt Grundstruktur. Waldreichtum, Kapelle Wachsbrunnen/Wasenbrunnen. |
+| 029   | —                      | ~65%               | ~5%                | ~30%            | 2                | 3-Wege-Merge. Einquartierung Elsenborn, 8. Kürassiere. Lehrerwechsel Bauer→Wirt. Codex schwach aber bestätigt Kernpassagen. |
+| 030   | —                      | ~60%               | ~5%                | ~35%            | 2                | 3-Wege-Merge. Nachtrag über Kriegsende 1918, Kriegergedenktafel 1920, Kriegerheimfest 1925. Lehrer Stoffels. |
+| 034   | —                      | ~50%               | ~5%                | ~45%            | 3                | 3-Wege-Merge. Codex extrem schwach (>80% unleserlich). Effektiv Claude+Gemini. Ostern, Ernte, Schulfeiern, Pfarrwechsel Ettges. |
+| 035   | —                      | ~40%               | ~5%                | ~55%            | 3                | 2-Wege-Merge (Claude + Codex). Codex sehr schwach. Fortgesetzte Erzählung Pfarrwechsel, Schulrevision. |
 | 038   | ~50%                   | ~25%               | ~5%                | ~20%            | 4                | Codex >70% unleserlich; Revisionsdaten divergieren; Schülerzahl 60 vs. 29; Entlassungen: nur Knaben oder auch Mädchen? |
 | 023   | ~20%                   | ~50%               | ~5%                | ~25%            | 1                | Claude-Lesung durchgehend unzuverlässig; Gemini/Codex-Mehrheit für oberen Teil; Gemini allein beste Lesung für Wasserabschnitt; untere Zeilen teilweise unleserlich |
 | 082   | ~70%                   | ~20%               | ~5%                | ~5%             | 2                | 3-Wege-Merge (Claude + Codex + Gemini). Sehr gute Übereinstimmung Codex/Gemini beim Haupttext. Lehrername: Gemini „Rumpp", Codex „Rumpf", Claude „Philipp" — Philipp bevorzugt (Kontextkonsistenz S.081/083). Ortsname: 3 Lesungen (Wäschbännen/Waschbrennen/Waxbrunnen) — „Waxbrunnen" per Benutzerhinweis. Klassenstärke 22+20 von Gemini. |
@@ -30,18 +35,26 @@
 | 084   | —                      | —                  | —                  | —               | 4                | Claude-only. Jahreseinleitung 1928 teilweise lesbar, 10. Februar Sturm, 14. Februar unklar, Klassenfrequenz. Zweiter Absatz der Einleitung sehr schwer lesbar. |
 | 085   | —                      | —                  | —                  | —               | 3                | Claude-only. Wahlergebnisse 1928 (historisch wertvoll), Stallbrand, Glockenankunft. Wahltabelle gut lesbar, Brandpassage unsicher. |
 | 086   | —                      | —                  | —                  | —               | 3                | Claude-only. Glockenweihe, Firma Mabilon & Co. Saarburg. Glockenbeschreibungen und Inschriften teilweise unsicher. |
+| 039   | —                      | ~55%               | ~5%                | ~40%            | 3                | 3-Wege-Merge. Codex halluziniert (anderer Texttyp). Effektiv Claude+Gemini. Ernte, Revision, Einquartierung. |
+| 040   | —                      | ~60%               | ~5%                | ~35%            | 2                | 3-Wege-Merge. Codex schwach (1905/06). Gemini stark (BGB 1900, Gewerbeordnung). Claude bestätigt. |
+| 041   | —                      | ~55%               | ~5%                | ~40%            | 2                | 3-Wege-Merge. Codex kontaminiert (Seite 029 statt 041). Effektiv Claude+Gemini. Schulrevisionen 1888/89. |
+| 042   | —                      | ~60%               | ~5%                | ~35%            | 2                | 3-Wege-Merge. Codex halluziniert (Kanzleidokument 1816). Effektiv Claude+Gemini. Lehrerwechsel Dezember 1898, Raskop, Schauff→Schax. |
+| 043   | —                      | ~55%               | ~5%                | ~40%            | 3                | 3-Wege-Merge. Codex halluziniert (Gerichtsverhandlung 1829). Effektiv Claude+Gemini. Schullehrer-Dienstländereien 1869, Lehrer Keil. |
+| 044   | —                      | ~55%               | ~5%                | ~40%            | 3                | 3-Wege-Merge. Codex halluziniert (Kirchendokument). Effektiv Claude+Gemini. Spaziergang, Ernte, Kartoffelfäule. |
+| 045   | —                      | ~65%               | ~5%                | ~30%            | 2                | 2-Wege-Merge (Claude + Gemini). Kriegerdenkmal 1928, Lehrerwechsel Theis→Gierten, Zweiklassige Schule ab Oktober 1928. |
 | 087   | —                      | —                  | —                  | —               | 2                | Claude-only. Kapellenreparaturen Juni, Erntebericht August, Herbstferien September, Jahresbilanz November. Küster Peter Manns gewürdigt. |
 
 ## Zusammenfassung
 
-- Seiten zusammengeführt: 16 (005–006, 011–012, 017, 021–023, 036–038, 082–087)
+- Seiten zusammengeführt: 28 (005–006, 011–012, 017, 020–023, 029–030, 034–035, 036–045, 082–087)
 - Gesamtumfang: 110 Seiten (001–110); Triple-LLM gilt für 002–110 (001 = Deckblatt, kein Text)
-- Durchschn. 3-Wege-Übereinstimmung: ~39%
-- Durchschn. 2-von-3 akzeptiert (Plausibilitätsprüfung bestanden): ~36%
+- Durchschn. 3-Wege-Übereinstimmung: ~30%
+- Durchschn. 2-von-3 akzeptiert (Plausibilitätsprüfung bestanden): ~45%
 - Durchschn. 2-von-3 abgelehnt (Plausibilitätsprüfung gescheitert): ~5%
-- Durchschn. alle abweichend: ~20%
-- Gesamt zur manuellen Prüfung markiert: 17
+- Durchschn. alle abweichend: ~30%
+- Gesamt zur manuellen Prüfung markiert: 46
 - Häufigste Verwechslungen: Codex [unleserlich]/halluziniert vs. Claude/Gemini-Lesungen; Eigennamen; Datumsangaben
+- **Codex-Qualität:** Codex liefert bei Kurrent-Scans sehr oft >70% [unleserlich] oder halluziniert komplett andere Inhalte. Effektive Merges sind daher meist 2-Wege (Claude + Gemini).
 
 ## Anmerkungen zum Umfang
 
@@ -53,11 +66,11 @@
 
 ## Phase-4-Status (Stand: 2026-03-20, Batch 2)
 
-| LLM    | Seiten fertig                             | Seiten fehlend                                            |
-|--------|-------------------------------------------|-----------------------------------------------------------|
-| Claude | 002–087 (86 Seiten)                       | 088–110 (23 Seiten)                                      |
-| Gemini | 005–017, 021–028, 031–039, 082 (30 Seiten) | 018–020, 029–030, 040–081, 083–110                      |
-| Codex  | 005–030, 036–038, 082–083 (31 Seiten)     | 031–035, 039–081, 084–110                                |
+| LLM    | Seiten fertig                                                       | Seiten fehlend                                            |
+|--------|---------------------------------------------------------------------|-----------------------------------------------------------|
+| Claude | 002–088 (87 Seiten)                                                 | 089–110 (22 Seiten) — **pausiert**                       |
+| Gemini | 005–019, 020, 021–028, 029–030, 031–039, 040–045, 082 (41 Seiten)  | 046–081, 083–110                                         |
+| Codex  | 005–033, 034–035, 036–038, 039–044, 082–083 (42 Seiten)            | 045–081, 084–110                                         |
 
 ## Rate-Limit-Protokoll
 
@@ -83,3 +96,6 @@
 | 2026-03-21  | Codex  | 083   | Transkription erfolgreich. 2-Wege-Merge mit Claude durchgeführt. Codex hat Claude-Transkript vorab gelesen. |
 | 2026-03-21  | Claude | 087   | Transkription erfolgreich. Als Merged-File gespeichert (Claude-only). |
 | 2026-03-21  | Gemini | 017   | Transkription erfolgreich. 3-Wege-Merge mit Claude+Codex durchgeführt. Bürgermeister-Passage: Gemini-Lesung bevorzugt. |
+| 2026-03-21  | Gemini | 020,029-030,040-045 | Batch-Transkription erfolgreich (9 Seiten). Gemini versuchte mehrfach Dateien zu schreiben (write_file-Fehler), gab Text dann als Ausgabe zurück. |
+| 2026-03-21  | Codex  | 034-035,039-044 | Batch-Transkription (8 Seiten). Qualität durchgehend schlecht: >70% [unleserlich], mehrere Seiten halluziniert (falsche Inhalte). Isolation via /tmp/codex_isolated_NNN/ verbesserte Seitenzuordnung, aber Codex 041 trotzdem kontaminiert (las /tmp-Dateien). |
+| 2026-03-21  | Claude | —     | Claude-Transkription auf Benutzerwunsch pausiert. Nur Merges durchgeführt. |
