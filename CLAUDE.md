@@ -70,6 +70,7 @@ Raw subfolders (`claude/`, `gemini/`, `codex/`) store **verbatim LLM output** â€
 #### Merge Report
 - `merge_report.md` (project root) tracks per-page 3-way merge statistics and human review flags.
 - **Language:** `merge_report.md` is written in German.
+- **Update frequency:** `merge_report.md` MUST be updated with every commit â€” at minimum: new merge table rows, Phase-4-Status table, and rate-limit log entries.
 - Pages where confidence is low are flagged for human review in both the merge report and the Hinweise section.
 
 #### Rate Limit Handling

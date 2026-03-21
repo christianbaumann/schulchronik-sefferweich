@@ -25,10 +25,15 @@
 | 017   | —                      | —                  | —                  | —               | 1                | 2-Wege-Merge (Claude + Codex, Gemini fehlt). Sehr hohe Übereinstimmung; Codex markiert „C. Engen" und „Submittenten" als unsicher; Bürgermeister-Passage schwer lesbar |
 | 038   | ~50%                   | ~25%               | ~5%                | ~20%            | 4                | Codex >70% unleserlich; Revisionsdaten divergieren; Schülerzahl 60 vs. 29; Entlassungen: nur Knaben oder auch Mädchen? |
 | 023   | ~20%                   | ~50%               | ~5%                | ~25%            | 1                | Claude-Lesung durchgehend unzuverlässig; Gemini/Codex-Mehrheit für oberen Teil; Gemini allein beste Lesung für Wasserabschnitt; untere Zeilen teilweise unleserlich |
+| 082   | —                      | ~60%               | ~5%                | ~35%            | 3                | 2-Wege-Merge (Claude + Codex). Codex-Lesung deutlich stärker: Heinzenhof/Waxbrunnen, Aachen-Burtscheid, Schneelandschaft. Lehrername: Codex liest „Rumpf", Claude „Philipp" — Philipp bevorzugt (Kontextkonsistenz). |
+| 083   | —                      | —                  | —                  | —               | 5                | Claude-only. Hindenburg-Feier, Schulrevision, Glockenbeschaffung, Versetzung nach Düsseldorf — viele unsichere Passagen (Wetterpassage, Glockenkosten). |
+| 084   | —                      | —                  | —                  | —               | 4                | Claude-only. Jahreseinleitung 1928 teilweise lesbar, 10. Februar Sturm, 14. Februar unklar, Klassenfrequenz. Zweiter Absatz der Einleitung sehr schwer lesbar. |
+| 085   | —                      | —                  | —                  | —               | 3                | Claude-only. Wahlergebnisse 1928 (historisch wertvoll), Stallbrand, Glockenankunft. Wahltabelle gut lesbar, Brandpassage unsicher. |
+| 086   | —                      | —                  | —                  | —               | 3                | Claude-only. Glockenweihe, Firma Mabilon & Co. Saarburg. Glockenbeschreibungen und Inschriften teilweise unsicher. |
 
 ## Zusammenfassung
 
-- Seiten zusammengeführt: 10 (005–006, 011–012, 017, 021–022, 036–038)
+- Seiten zusammengeführt: 15 (005–006, 011–012, 017, 021–023, 036–038, 082–086)
 - Gesamtumfang: 110 Seiten (001–110); Triple-LLM gilt für 002–110 (001 = Deckblatt, kein Text)
 - Durchschn. 3-Wege-Übereinstimmung: ~39%
 - Durchschn. 2-von-3 akzeptiert (Plausibilitätsprüfung bestanden): ~36%
@@ -49,9 +54,9 @@
 
 | LLM    | Seiten fertig                             | Seiten fehlend                                            |
 |--------|-------------------------------------------|-----------------------------------------------------------|
-| Claude | 005–070 (66 Seiten)                       | 002–004 (Scans jetzt verfügbar); 071–110 (neu)           |
-| Gemini | 005–015, 021–028, 031–039 (28 Seiten)     | 016–020, 029–030, 040–044; auch 002–004, 045–110         |
-| Codex  | 005–009, 011–012, 017, 021–023, 036–038 (14 Seiten) | 010, 013–016, 018–020, 024–030, 031–035, 039–044; auch 002–004, 045–110 |
+| Claude | 002–086 (85 Seiten)                       | 087–110 (25 Seiten)                                      |
+| Gemini | 005–016, 021–028, 031–039 (29 Seiten)     | 017–020, 029–030, 040–110                                |
+| Codex  | 005–030, 036–038, 082 (30 Seiten)         | 031–035, 039–081, 083–110                                |
 
 ## Rate-Limit-Protokoll
 
@@ -70,3 +75,7 @@
 | 2026-03-21  | Gemini | 017   | QUOTA_EXHAUSTED — „Reset nach 8h20m". Gemini-Verarbeitung gestoppt. |
 | 2026-03-21  | Codex  | 023   | Seite 023 erfolgreich transkribiert. 3-Wege-Merge mit Claude+Gemini durchgeführt. |
 | 2026-03-21  | Claude | 070   | Seite 070 erfolgreich transkribiert. Als Merged-File gespeichert (Claude-only). |
+| 2026-03-21  | Claude | 082–086 | Seiten 082–086 erfolgreich transkribiert. |
+| 2026-03-21  | Codex  | 082   | Seite 082 transkribiert (gute Qualität). 2-Wege-Merge mit Claude durchgeführt. Codex hat Claude-Transkript vorab gelesen — keine volle Unabhängigkeit. |
+| 2026-03-21  | Gemini | 082   | Erster Versuch: Tool-Fehler (write_file nicht verfügbar). Retry läuft. |
+| 2026-03-21  | Codex  | 083   | Transkription gestartet (läuft im Hintergrund). |
