@@ -22,7 +22,7 @@
 | 022   | ~15%                   | ~60%               | ~5%                | ~20%            | 1                | Codex gescheitert; Gemini klar stärkste Transkription; viele Korrekturen vs Claude-only (Schuljahr, Schulfeiern, 50 Häuser) |
 | 036   | ~55%                   | ~25%               | ~5%                | ~15%            | 3                | Überschrift von Gemini/Codex falsch gelesen („Jammerstimmung" statt „Einweihung"); Codex viele [unleserlich]; Ortsname Dusemond vs. Düsseldorf |
 | 037   | ~70%                   | ~20%               | ~3%                | ~7%             | 1                | Gute Übereinstimmung bei Ernte-Abschnitt; „Nisten" nur von Claude erkannt; Codex hat Konversationstext am Ende |
-| 017   | —                      | —                  | —                  | —               | 1                | 2-Wege-Merge (Claude + Codex, Gemini fehlt). Sehr hohe Übereinstimmung; Codex markiert „C. Engen" und „Submittenten" als unsicher; Bürgermeister-Passage schwer lesbar |
+| 017   | ~60%                   | ~25%               | ~5%                | ~10%            | 2                | 3-Wege-Merge (Claude + Codex + Gemini). Bürgermeister-Passage: Gemini-Lesung „Bürgermeister Spang dieses Amt" trotz 2-von-3-Minderheit bevorzugt (grammatisch korrekt). Geburtsort/Datum: Fließem/31.1. (2-von-3) vs. Coblenz/21.1. (Gemini). |
 | 038   | ~50%                   | ~25%               | ~5%                | ~20%            | 4                | Codex >70% unleserlich; Revisionsdaten divergieren; Schülerzahl 60 vs. 29; Entlassungen: nur Knaben oder auch Mädchen? |
 | 023   | ~20%                   | ~50%               | ~5%                | ~25%            | 1                | Claude-Lesung durchgehend unzuverlässig; Gemini/Codex-Mehrheit für oberen Teil; Gemini allein beste Lesung für Wasserabschnitt; untere Zeilen teilweise unleserlich |
 | 082   | ~70%                   | ~20%               | ~5%                | ~5%             | 2                | 3-Wege-Merge (Claude + Codex + Gemini). Sehr gute Übereinstimmung Codex/Gemini beim Haupttext. Lehrername: Gemini „Rumpp", Codex „Rumpf", Claude „Philipp" — Philipp bevorzugt (Kontextkonsistenz S.081/083). Ortsname: 3 Lesungen (Wäschbännen/Waschbrennen/Waxbrunnen) — „Waxbrunnen" per Benutzerhinweis. Klassenstärke 22+20 von Gemini. |
@@ -30,10 +30,11 @@
 | 084   | —                      | —                  | —                  | —               | 4                | Claude-only. Jahreseinleitung 1928 teilweise lesbar, 10. Februar Sturm, 14. Februar unklar, Klassenfrequenz. Zweiter Absatz der Einleitung sehr schwer lesbar. |
 | 085   | —                      | —                  | —                  | —               | 3                | Claude-only. Wahlergebnisse 1928 (historisch wertvoll), Stallbrand, Glockenankunft. Wahltabelle gut lesbar, Brandpassage unsicher. |
 | 086   | —                      | —                  | —                  | —               | 3                | Claude-only. Glockenweihe, Firma Mabilon & Co. Saarburg. Glockenbeschreibungen und Inschriften teilweise unsicher. |
+| 087   | —                      | —                  | —                  | —               | 2                | Claude-only. Kapellenreparaturen Juni, Erntebericht August, Herbstferien September, Jahresbilanz November. Küster Peter Manns gewürdigt. |
 
 ## Zusammenfassung
 
-- Seiten zusammengeführt: 15 (005–006, 011–012, 017, 021–023, 036–038, 082–086)
+- Seiten zusammengeführt: 16 (005–006, 011–012, 017, 021–023, 036–038, 082–087)
 - Gesamtumfang: 110 Seiten (001–110); Triple-LLM gilt für 002–110 (001 = Deckblatt, kein Text)
 - Durchschn. 3-Wege-Übereinstimmung: ~39%
 - Durchschn. 2-von-3 akzeptiert (Plausibilitätsprüfung bestanden): ~36%
@@ -54,9 +55,9 @@
 
 | LLM    | Seiten fertig                             | Seiten fehlend                                            |
 |--------|-------------------------------------------|-----------------------------------------------------------|
-| Claude | 002–086 (85 Seiten)                       | 087–110 (25 Seiten)                                      |
-| Gemini | 005–016, 021–028, 031–039 (29 Seiten)     | 017–020, 029–030, 040–110                                |
-| Codex  | 005–030, 036–038, 082 (30 Seiten)         | 031–035, 039–081, 083–110                                |
+| Claude | 002–087 (86 Seiten)                       | 088–110 (23 Seiten)                                      |
+| Gemini | 005–017, 021–028, 031–039, 082 (30 Seiten) | 018–020, 029–030, 040–081, 083–110                      |
+| Codex  | 005–030, 036–038, 082–083 (31 Seiten)     | 031–035, 039–081, 084–110                                |
 
 ## Rate-Limit-Protokoll
 
@@ -80,3 +81,5 @@
 | 2026-03-21  | Gemini | 082   | Erster Versuch: Tool-Fehler (write_file nicht verfügbar). Retry läuft. |
 | 2026-03-21  | Gemini | 082   | Retry erfolgreich — vollständige Transkription erhalten. 3-Wege-Merge mit Claude+Codex durchgeführt. |
 | 2026-03-21  | Codex  | 083   | Transkription erfolgreich. 2-Wege-Merge mit Claude durchgeführt. Codex hat Claude-Transkript vorab gelesen. |
+| 2026-03-21  | Claude | 087   | Transkription erfolgreich. Als Merged-File gespeichert (Claude-only). |
+| 2026-03-21  | Gemini | 017   | Transkription erfolgreich. 3-Wege-Merge mit Claude+Codex durchgeführt. Bürgermeister-Passage: Gemini-Lesung bevorzugt. |
