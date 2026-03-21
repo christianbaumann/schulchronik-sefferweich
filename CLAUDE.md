@@ -86,7 +86,7 @@ Raw subfolders (`claude/`, `gemini/`, `codex/`) store **verbatim LLM output** �
 
 ### Workflow
 - **Always start with the lowest page number not yet transcribed** for each LLM stream.
-- **After EVERY saved LLM transcription:** (1) update the merged transcript `Transkript/NNN.md` for that page, (2) fully regenerate `Transkript.txt`, (3) **commit and push immediately**. No exceptions. **Do NOT skip the merge update** even if the new transcript "confirms" an existing one — a 2-way or 3-way merge always produces a better result than a single-LLM transcript.
+- **After EVERY saved LLM transcription:** (1) update the merged transcript `Transkript/NNN.md` for that page, (2) validate and generate LaTeX (see below), (3) fully regenerate `Transkript.txt`, (4) **commit and push immediately**. No exceptions. **Do NOT skip the merge update** even if the new transcript "confirms" an existing one — a 2-way or 3-way merge always produces a better result than a single-LLM transcript.
 - **Updating merged transcripts (`Transkript/NNN.md`):** Whenever a new raw LLM transcript is saved, update the corresponding merged file:
   - **3 LLMs available:** Perform proper 3-way merge (Tiers 0–8, read scan + all 3 transcripts).
   - **2 LLMs available:** Perform 2-way comparison with scan verification.
@@ -94,6 +94,15 @@ Raw subfolders (`claude/`, `gemini/`, `codex/`) store **verbatim LLM output** �
   - The merged file always reflects the **best available data** at any point in time.
 - **Regenerating `Transkript.txt`:** Rebuild from scratch every time using `Transkript/NNN.md` (merged files only). Never append — always regenerate the full file.
 - **Progress output:** Give detailed status updates: which page is being read, transcribed, or written. Announce each sub-task (e.g., "Reading scan 016...", "Writing Transkript/016.md...", "Regenerating Transkript.txt...", "Committing...").
+- **LaTeX validation and override:** After updating a merged transcript, run `python3 latex/md2tex.py --page NNN`. Read the generated `latex/pages/NNN.tex` and check for significant deviations:
+  - **Missing content** — text in the .md not present in the .tex (e.g., second text block dropped, year heading consumed as page number).
+  - **Wrong structural element** — content classified as the wrong LaTeX construct (e.g., name → `\abschnitt`, prose → `\begin{verse}`, date → heading).
+  - **Broken `\pstart`/`\pend` nesting** — spurious or missing paragraph boundaries from misclassification.
+  - **Incorrect margin attribution** — margin text in body or body text in margin.
+  - If a significant deviation is found: write the corrected `latex/pages/NNN.tex` directly, update `latex/gold/NNN.tex` if this represents a new pattern, and log the override in `merge_report.md`.
+  - If no significant deviation: accept md2tex.py's output as-is.
+  - Minor differences (whitespace, abbreviation spacing, `\ob` at paragraph boundaries) do NOT warrant override.
+- **Gold standards (`latex/gold/`):** Can be updated or added when Claude overrides md2tex.py on a page that represents a new layout pattern. Gold files serve as regression anchors for `md2tex.py --validate`.
 - **Update CLAUDE.md after every relevant workflow or structural change.**
 
 ### Phase 3: Consolidation (`Transkript/` → `Transkript.txt`)
