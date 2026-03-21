@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate latex/schulchronik.tex from all page files in latex/pages/.
+"""Generate LaTeX/schulchronik.tex from all page files in LaTeX/pages/.
 
 Detection rules for each page file:
 - "starts_with_heading": first non-comment, non-blank, non-\\seite line is

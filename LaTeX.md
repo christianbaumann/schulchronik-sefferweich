@@ -1,11 +1,11 @@
 # LaTeX Publishing Pipeline
 
-This document covers the LaTeX setup for producing faithful-layout PDF output from the Schulchronik transcripts. For the research background (toolchain evaluation, rejected alternatives, font recommendations), see `docs/agents/research/2026-03-20-latex-multi-format-publishing.md`.
+This document covers the LaTeX setup for producing faithful-layout PDF output from the Schulchronik transcripts. For the research background (toolchain evaluation, rejected alternatives, font recommendations), see `Docs/agents/research/2026-03-20-latex-multi-format-publishing.md`.
 
 ## Architecture
 
 ```
-Transkript/*.md ──► md2tex.py ──► latex/pages/*.tex ──► generate_main.py ──► lualatex ──► PDF
+Transkript/*.md ──► md2tex.py ──► LaTeX/pages/*.tex ──► generate_main.py ──► lualatex ──► PDF
                    (automated)     (LaTeX source)       (schulchronik.tex)    (reledmac)
 ```
 
@@ -16,7 +16,7 @@ Future: HTML via `make4ht`/`lwarp`, EPUB via `tex4ebook` (deferred until PDF tem
 ## Directory Structure
 
 ```
-latex/
+LaTeX/
 ├── schulchronik.tex          # Main document (\input commands)
 ├── preamble.tex              # Package loading, custom commands, toggles
 ├── pages/
@@ -30,8 +30,8 @@ latex/
 ## Build
 
 ```bash
-cd latex && make pdf          # two-pass lualatex
-cd latex && make clean        # remove auxiliary files
+cd LaTeX && make pdf          # two-pass lualatex
+cd LaTeX && make clean        # remove auxiliary files
 ```
 
 Requires: LuaLaTeX (TeX Live), packages `reledmac`, `ebgaramond`, `csquotes`, `fontspec`, `geometry`, `ulem`, `babel-german`, `bigfoot` (provides `suffix.sty`), `xargs`, `xstring`, `ragged2e`, `xkeyval`.
@@ -169,14 +169,14 @@ Key dependency chain for `reledmac`: requires `xargs`, `suffix` (in `bigfoot` pa
 
 ## Converting Markdown Transcripts to LaTeX
 
-**Automated by `latex/md2tex.py`** — run manually or via GitHub Actions.
+**Automated by `LaTeX/md2tex.py`** — run manually or via GitHub Actions.
 
 ```bash
-python3 latex/md2tex.py              # Convert all pages
-python3 latex/md2tex.py --page 005   # Convert single page
-python3 latex/md2tex.py --dry-run    # Show what would change
-python3 latex/md2tex.py --validate   # Compare against gold-standard files
-python3 latex/md2tex.py --debug      # Print line classification debug output
+python3 LaTeX/md2tex.py              # Convert all pages
+python3 LaTeX/md2tex.py --page 005   # Convert single page
+python3 LaTeX/md2tex.py --dry-run    # Show what would change
+python3 LaTeX/md2tex.py --validate   # Compare against gold-standard files
+python3 LaTeX/md2tex.py --debug      # Print line classification debug output
 ```
 
 ### Conversion Rules (applied by md2tex.py)
@@ -199,12 +199,12 @@ python3 latex/md2tex.py --debug      # Print line classification debug output
 
 - **Page 002 (title page):** Hand-crafted `.tex` preserved as-is (tabular structure with ditto marks)
 - **Page 000 (cover):** Simple centered layout, auto-generated
-- **Gold standard:** `latex/gold/` contains reference `.tex` files for regression testing
+- **Gold standard:** `LaTeX/gold/` contains reference `.tex` files for regression testing
 
 ## References
 
 - [reledmac manual (PDF)](http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/reledmac/reledmac.pdf)
 - [reledmac sidenotes example](https://mirrors.mit.edu/CTAN/macros/latex2e/contrib/reledmac/examples/1-sidenotes.tex)
 - [KOMA-Script scrbook documentation](https://ctan.org/pkg/koma-script)
-- Research: `docs/agents/research/2026-03-20-latex-multi-format-publishing.md`
-- Plan: `docs/agents/plans/2026-03-20-latex-prototype.md`
+- Research: `Docs/agents/research/2026-03-20-latex-multi-format-publishing.md`
+- Plan: `Docs/agents/plans/2026-03-20-latex-prototype.md`

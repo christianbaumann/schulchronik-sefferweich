@@ -2,19 +2,19 @@
 
 ## Planned Features
 
-- [ ] **Annotation footnotes (configurable):** Extract Hinweise and Analyse sections from `Transkript/NNN.md` and convert them to `\hinweise{...}` / `\analyse{...}` LaTeX commands in the generated `.tex` page files. The `\annotations` toggle in `preamble.tex` already supports showing/hiding these as footnotes or endnotes. Implementation: add a `--annotations` flag to `latex/md2tex.py`.
+- [ ] **Annotation footnotes (configurable):** Extract Hinweise and Analyse sections from `Transkript/NNN.md` and convert them to `\hinweise{...}` / `\analyse{...}` LaTeX commands in the generated `.tex` page files. The `\annotations` toggle in `preamble.tex` already supports showing/hiding these as footnotes or endnotes. Implementation: add a `--annotations` flag to `LaTeX/md2tex.py`.
 
 ## Ongoing: Gold Standard Review for md2tex.py
 
 The `md2tex.py` converter uses spatial heuristics to classify lines (headings, margin notes, verse, signatures, etc.). Because every page in the Schulchronik has unique layout quirks, **new page types will surface that the heuristic parser cannot handle correctly**. This requires continuous review:
 
-- [ ] **After every batch of new pages:** Run `python3 latex/md2tex.py --dry-run` and spot-check the generated `.tex` files against the original scans. Look for:
+- [ ] **After every batch of new pages:** Run `python3 LaTeX/md2tex.py --dry-run` and spot-check the generated `.tex` files against the original scans. Look for:
   - Headings misclassified as verse (or vice versa)
   - Margin notes incorrectly grouped or missed
   - Signature blocks rendered as prose
   - Diary-format dates not detected
   - Continuation lines from previous pages misclassified
-- [ ] **When a new layout pattern is found:** Add a representative page to `latex/gold/` as a regression reference and adjust the heuristic parser in `md2tex.py` to handle it. Then verify all existing gold pages still pass with `python3 latex/md2tex.py --validate`.
+- [ ] **When a new layout pattern is found:** Add a representative page to `LaTeX/gold/` as a regression reference and adjust the heuristic parser in `md2tex.py` to handle it. Then verify all existing gold pages still pass with `python3 LaTeX/md2tex.py --validate`.
 - **Known heuristic limitations discovered so far:**
   - Heading detection requires the heading to be preceded by a blank line and either followed by a blank line OR centered past `main_col + 4`. Pages where headings run directly into text without spacing need the centering heuristic.
   - The `_is_heading_text()` function uses a list of known patterns (e.g., "Revision", "Das Jahr NNNN"). New heading forms need to be added as encountered.
@@ -22,7 +22,7 @@ The `md2tex.py` converter uses spatial heuristics to classify lines (headings, m
   - Abbreviation detection uses a fixed list (`_ABBREVIATIONS`). Words like "Lud." (Ludovicus) can be ambiguous — sometimes abbreviation, sometimes sentence-ending period.
   - The `"` ditto mark is not auto-converted in prose; it's only meaningful in title page / diary contexts. Cross-page closing quotes (`"`) are left as-is.
   - Diary-format pages (dates in left margin) are detected by a date-pattern ratio heuristic; unusual date formats may be missed.
-- **Current gold-standard pages:** 002, 005, 012, 015, 020 (in `latex/gold/` once Phase 4 is completed).
+- **Current gold-standard pages:** 002, 005, 012, 015, 020 (in `LaTeX/gold/` once Phase 4 is completed).
 
 ## Research Tasks
 

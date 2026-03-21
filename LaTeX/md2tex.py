@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-r"""Convert Transkript/NNN.md to latex/pages/NNN.tex.
+r"""Convert Transkript/NNN.md to LaTeX/pages/NNN.tex.
 
 Reads the text block from each merged transcript, analyzes the spatial
 layout (margin notes, main text column, headings, verse blocks), and emits

@@ -42,7 +42,7 @@ Transkript/             Zusammengeführte Transkripte (Markdown)
   ├── gemini/           Rohtranskriptionen — Gemini
   └── codex/            Rohtranskriptionen — Codex
 Transkript.txt          Gesamttranskript (Reintext)
-latex/                  LaTeX-Quellen für PDF-Ausgabe
+LaTeX/                  LaTeX-Quellen für PDF-Ausgabe
 merge_report.md         Merge-Statistiken und Prüfhinweise
 ```
 
@@ -60,7 +60,7 @@ Details zur LaTeX-Pipeline: siehe [LaTeX.md](LaTeX.md).
 ### Lokaler Build (LaTeX → PDF)
 
 ```bash
-cd latex && make pdf
+cd LaTeX && make pdf
 ```
 
 Voraussetzung: LuaLaTeX mit `reledmac`-Paket. Die PDF wird auch automatisch per GitHub Actions bei jedem Push erzeugt.

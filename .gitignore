@@ -1,18 +1,18 @@
 # LaTeX build artifacts
-latex/*.aux
-latex/*.log
-latex/*.out
-latex/*.toc
-latex/*.pdf
-latex/*.bbl
-latex/*.blg
-latex/*.synctex.gz
-latex/*.1
-latex/*.1R
-latex/*.end
-latex/*.enR
-latex/*.fls
-latex/*.fdb_latexmk
+LaTeX/*.aux
+LaTeX/*.log
+LaTeX/*.out
+LaTeX/*.toc
+LaTeX/*.pdf
+LaTeX/*.bbl
+LaTeX/*.blg
+LaTeX/*.synctex.gz
+LaTeX/*.1
+LaTeX/*.1R
+LaTeX/*.end
+LaTeX/*.enR
+LaTeX/*.fls
+LaTeX/*.fdb_latexmk
 
 # Python
 __pycache__/
@@ -21,4 +21,4 @@ __pycache__/
 .DS_Store
 
 # Agent docs
-docs/
+Docs/
