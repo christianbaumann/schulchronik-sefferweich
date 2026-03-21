@@ -43,11 +43,16 @@
 | 044   | —                      | —                  | —                  | —               | 4                | Claude-only + Scan-Verifizierung. Gemini kontaminiert (1899/1900 statt 1908), gelöscht. Codex halluziniert (Kirchendokument). Spaziergang, Ernte, Kartoffelfäule. |
 | 045   | —                      | ~65%               | ~5%                | ~30%            | 2                | 2-Wege-Merge (Claude + Gemini). Kriegerdenkmal 1928, Lehrerwechsel Theis→Gierten, Zweiklassige Schule ab Oktober 1928. |
 | 087   | —                      | —                  | —                  | —               | 2                | Claude-only. Kapellenreparaturen Juni, Erntebericht August, Herbstferien September, Jahresbilanz November. Küster Peter Manns gewürdigt. |
-| 051   | ~5%                    | ~70%               | ~5%                | ~20%            | 2                | 3-Wege-Merge. Codex vollständig halluziniert (fabricated „Beurtheilung"-Dokument). Claude in mehreren Abschnitten garbled. Gemini klar beste Quelle. Kirchlichkeiten vs. Gedächtnisfeier unklar, „Kirchlichkeiten" übernommen. Schuljahr 1914/15, Kriegsausbruch. LaTeX: „Besondere Ereignisse" als `\abschnitt` korrigiert. |
+| 051   | ~5%                    | ~70%               | ~5%                | ~20%            | 2                | 3-Wege-Merge. Codex vollständig halluziniert (fabricated „Beurtheilung"-Dokument). Claude in mehreren Abschnitten garbled. Gemini klar beste Quelle. Kirchlichkeiten vs. Gedächtnisfeier unklar, „Kirchlichkeiten" übernommen. Schuljahr 1914/15, Kriegsausbruch. LaTeX: „Besondere Ereignisse" als \abschnitt korrigiert. |
+| 052   | ~5%                    | ~75%               | ~5%                | ~15%            | 1                | 3-Wege-Merge. Codex halluziniert (Religion/Bibel). Claude fast komplett garbled. Gemini klar beste Quelle. Mobilmachung Aug. 1914, sächsische Einquartierung 11-1200 Mann, Liebesgaben, erste Gefallene. Marginalnotiz „Gelesen 19.2.15". |
+| 053   | ~5%                    | ~70%               | ~5%                | ~20%            | 2                | 3-Wege-Merge. Codex halluziniert (1854 Gemeindedokument). Claude garbled (Schülerzahl 32 statt Gemini 38). Schuljahr 1915/16, Ernte, Heimatfront-Fortsetzung. Preise Butter/Eier 1,50-1,60 M. LaTeX: Schuljahr-Überschrift korrigiert. |
+| 054   | ~5%                    | ~70%               | ~5%                | ~20%            | 2                | 3-Wege-Merge. Codex halluziniert (1816 Vieh/Tambora). Claude garbled (914 M statt 717 M). 4. Kriegsanleihe, Schuljahr 1916-17, Sammlungen für Trier. Preise 2,20-2,40 Mk. |
+| 055   | ~10%                   | ~65%               | ~5%                | ~20%            | 2                | 3-Wege-Merge. Codex teilweise korrekte Epoche aber >70% unleserlich. Claude „Schuljahr 1914-18" statt korrekt „1917-18". 5.-7. Kriegsanleihe (352/720/580 M). Schuljahr 1918-19, Ostern 14.3.19. |
+| 056   | ~10%                   | ~65%               | ~5%                | ~20%            | 2                | 3-Wege-Merge. Codex halluziniert (Influenza-Bericht). Claude garbled (Schülerzahl „24" statt 44). Schuljahr 1919-20, Kriegsfolgen (7 Gefallene, 1 Krüppel, 4 Gefangene), Maul- u. Klauenseuche. LaTeX: Datumsnotiz korrigiert. |
 
 ## Zusammenfassung
 
-- Seiten zusammengeführt: 29 (005–006, 011–012, 017, 020–023, 029–030, 034–035, 036–045, 051, 082–087)
+- Seiten zusammengeführt: 34 (005–006, 011–012, 017, 020–023, 029–030, 034–035, 036–045, 051–056, 082–087)
 - Gesamtumfang: 110 Seiten (001–110); Triple-LLM gilt für 002–110 (001 = Deckblatt, kein Text)
 - Durchschn. 3-Wege-Übereinstimmung: ~30%
 - Durchschn. 2-von-3 akzeptiert (Plausibilitätsprüfung bestanden): ~45%
@@ -70,8 +75,8 @@
 | LLM    | Seiten fertig                                                       | Seiten fehlend                                            |
 |--------|---------------------------------------------------------------------|-----------------------------------------------------------|
 | Claude | 002–088 (87 Seiten)                                                 | 089–110 (22 Seiten) — **in Bearbeitung**                 |
-| Gemini | 005–020, 021–028, 029–030, 031–039, 045, 051, 082 (37 Seiten)      | 040–044, 046–050, 052–081, 083–110 (040–044: kontaminiert, gelöscht) |
-| Codex  | 005–033, 034–035, 036–038, 039–044, 051, 082–083 (43 Seiten)       | 045–050, 052–081, 084–110                                |
+| Gemini | 005–020, 021–028, 029–030, 031–039, 045, 051–056, 082 (42 Seiten)  | 040–044, 046–050, 057–081, 083–110 (040–044: kontaminiert, gelöscht) |
+| Codex  | 005–033, 034–035, 036–038, 039–044, 051–056, 082–083 (48 Seiten)   | 045–050, 057–081, 084–110                                |
 
 ## Rate-Limit-Protokoll
 
