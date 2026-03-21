@@ -74,9 +74,10 @@ Raw subfolders (`claude/`, `gemini/`, `codex/`) store **verbatim LLM output** �
 - Process pages sequentially within each LLM stream.
 
 #### Phase 2d: 3-Way Merge (`claude/ + gemini/ + codex/` → `Transkript/`)
+- **Codex reliability warning (Kurrent):** Codex/GPT-5.4 consistently hallucinates on Kurrent handwriting — it fabricates entirely unrelated documents instead of reading the actual scan. During merges, be extra suspicious of Codex results. When in doubt, **Codex loses**. Only trust Codex readings when independently confirmed by at least one other LLM. Never let a Codex-only reading override Claude or Gemini consensus.
 - Claude reads all three raw transcriptions + the scan, performs word-by-word 3-way comparison using Tiers 0–8:
   - **Tier 0:** 3-way agreement → accept
-  - **Tier 1:** 2-of-3 majority → sanity check (real word? context fit? dissenter better? Sütterlin confusion pair?) → accept or reject
+  - **Tier 1:** 2-of-3 majority → sanity check (real word? context fit? dissenter better? Sütterlin confusion pair?) → accept or reject. **If Codex is the majority partner on a Kurrent page, verify extra carefully against the scan.**
   - **Tiers 2–6:** Handle uncertainty markers, real-word vs. non-word, confusion matrix, layout, hallucination
   - **Tier 7:** Merge notes/analysis from all three into Hinweise and Analyse sections
   - **Tier 8:** Irreconcilable conflicts → flag in Hinweise with `**Abweichende Lesarten:**`
