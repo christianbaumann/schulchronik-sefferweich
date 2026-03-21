@@ -1,5 +1,17 @@
 # Merge-Bericht
 
+## Begriffserklärung
+
+**3-Wege-Übereinstimmung** — Alle drei LLMs (Claude, Gemini, Codex) liefern dieselbe Lesung. Höchste Konfidenz.
+
+**2-von-3 Akzeptiert** — Zwei LLMs stimmen überein und die Mehrheitslesung besteht die Plausibilitätsprüfung (echtes Wort, Kontextpassung, keine Kurrent-Verwechslung).
+
+**2-von-3 Abgelehnt** — Zwei LLMs stimmen überein, aber die Mehrheitslesung fällt bei der Plausibilitätsprüfung durch (z. B. kein sinnvolles Wort, Kontextbruch). Die abweichende Lesung oder eine manuelle Korrektur wird bevorzugt.
+
+**Alle Abweichend** — Alle drei LLMs liefern unterschiedliche Lesungen. Entscheidung erfolgt durch Scan-Abgleich und Kontextanalyse.
+
+**Manuelle Prüfung** — Anzahl der Stellen, die für eine menschliche Überprüfung markiert wurden (z. B. irreconcilable Lesarten, sehr unsichere Passagen).
+
 | Seite | 3-Wege-Übereinstimmung | 2-von-3 Akzeptiert | 2-von-3 Abgelehnt | Alle Abweichend | Manuelle Prüfung | Anmerkungen |
 |-------|------------------------|--------------------|--------------------|-----------------|------------------|-------------|
 | 005   | ~45%                   | ~40%               | ~5%                | ~10%            | 2                | Claude divergiert stark von Gemini/Codex; „Filialen" (2-von-3) statt „Pfarren"; Gedichtzeile 1 irreconcilable; interlineare „[nicht]"-Einfügung |
