@@ -1,4 +1,4 @@
-name: Build Schulchronik PDF
+name: Build & Deploy
 
 on:
   push:
@@ -8,6 +8,9 @@ on:
       - 'Scans/embedded/**'
       - 'Transkript/*'
       - 'merge_report.md'
+      - 'scripts/**'
+      - '.github/workflows/build-pdf.yml'
+      - '.github/pages/**'
   workflow_dispatch:
 
 # Only allow one deployment at a time
@@ -45,7 +48,8 @@ jobs:
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
-  build:
+  # ── Chronik outputs (PDF for now; epub/html later) ──────────────
+  build-chronik:
     needs: regenerate
     runs-on: ubuntu-latest
     steps:
@@ -63,6 +67,18 @@ jobs:
           working_directory: latex
           latexmk_use_lualatex: true
 
+      - name: Upload Chronik artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: chronik
+          path: latex/schulchronik.pdf
+
+  # ── Transkriptionsbericht ───────────────────────────────────────
+  build-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
       - name: Prepare merge report for PDF
         run: |
           mkdir -p _build
@@ -77,11 +93,36 @@ jobs:
             --template eisvogel
             --pdf-engine=lualatex
 
-      - name: Prepare Pages site
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: report
+          path: transkriptionsbericht.pdf
+
+  # ── Assemble & deploy to GitHub Pages ───────────────────────────
+  deploy:
+    needs: [build-chronik, build-report]
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Download Chronik artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: chronik
+          path: _site
+
+      - name: Download report artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: report
+          path: _site
+
+      - name: Generate index.html
         run: |
-          mkdir -p _site
-          cp latex/schulchronik.pdf _site/schulchronik.pdf
-          cp transkriptionsbericht.pdf _site/transkriptionsbericht.pdf
           BUILD_DATE=$(date -u +"%d. %B %Y" | sed \
             -e 's/January/Januar/' \
             -e 's/February/Februar/' \
@@ -102,13 +143,6 @@ jobs:
         with:
           path: _site
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
