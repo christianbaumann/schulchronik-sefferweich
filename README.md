@@ -15,6 +15,18 @@ Die PDF wird bei jedem neuen Transkriptionsfortschritt automatisch aktualisiert.
 
 Das Projekt ist ein Vorhaben des **Arbeitskreises Geschichte [Sefferweich](https://www.sefferweich.de)**.
 
+> **Hinweis zum aktuellen Stand:** Dieses Projekt befindet sich in aktiver Bearbeitung. Die drei eingesetzten KI-Systeme (Claude, Gemini, Codex) unterscheiden sich deutlich in ihrer Fähigkeit, Kurrentschrift zu entziffern — manche liefern sehr gute Ergebnisse, andere haben noch erhebliche Schwächen. Da die Transkription pro KI unterschiedlich weit fortgeschritten ist, kann es vorkommen, dass für eine bestimmte Seite bisher nur die Lesung des schwächsten Systems in der zusammengeführten Fassung steht. Die Qualität einzelner Seiten kann daher derzeit noch stark schwanken. Mit jedem weiteren abgeschlossenen Transkriptionsdurchlauf und dem anschließenden 3-Wege-Abgleich verbessert sich die Gesamtqualität spürbar.
+
+### Fortschritt
+
+Aktuelle Merge-Statistiken: siehe [merge_report.md](merge_report.md).
+
+- **Umfang:** 110 Seiten (scannen der Chronik ist in Arbeit)
+- **Claude-Transkriptionen:** 005–044
+- **Gemini-Transkriptionen:** 005–014, 021–028, 031–039
+- **Codex-Transkriptionen:** 005–006, 011–012, 021–022, 036–038
+- **3-Wege-Merges:** 005–006, 011–012, 017, 021–022, 036–038
+
 ## Technische Details
 
 ### Projektstruktur
@@ -40,18 +52,6 @@ merge_report.md         Merge-Statistiken und Prüfhinweise
 
 Details zu Pipeline, Transkriptionskonventionen und Merge-Verfahren: siehe [CLAUDE.md](CLAUDE.md).
 Details zur LaTeX-Pipeline: siehe [LaTeX.md](LaTeX.md).
-
-### Fortschritt
-
-- **Umfang:** 110 Seiten (scannen der Chronik ist in Arbeit)
-- **Claude-Transkriptionen:** 005–044
-- **Gemini-Transkriptionen:** 005–014, 021–028, 031–039
-- **Codex-Transkriptionen:** 005–006, 011–012, 021–022, 036–038
-- **3-Wege-Merges:** 005–006, 011–012, 017, 021–022, 036–038
-
-Aktuelle Merge-Statistiken: siehe [merge_report.md](merge_report.md).
-
-> **Hinweis zum aktuellen Stand:** Dieses Projekt befindet sich in aktiver Bearbeitung. Die drei eingesetzten KI-Systeme (Claude, Gemini, Codex) unterscheiden sich deutlich in ihrer Fähigkeit, Kurrentschrift zu entziffern — manche liefern sehr gute Ergebnisse, andere haben noch erhebliche Schwächen. Da die Transkription pro KI unterschiedlich weit fortgeschritten ist, kann es vorkommen, dass für eine bestimmte Seite bisher nur die Lesung des schwächsten Systems in der zusammengeführten Fassung steht. Die Qualität einzelner Seiten kann daher derzeit noch stark schwanken. Mit jedem weiteren abgeschlossenen Transkriptionsdurchlauf und dem anschließenden 3-Wege-Abgleich verbessert sich die Gesamtqualität spürbar.
 
 ### Lokaler Build (LaTeX → PDF)
 
