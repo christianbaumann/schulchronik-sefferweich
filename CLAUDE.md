@@ -39,21 +39,33 @@ Raw subfolders (`claude/`, `gemini/`, `codex/`) store **verbatim LLM output** �
 - Use subagents to parallelize.
 
 #### Phase 2b: Gemini Transcription (`Scans/` → `Transkript/gemini/`)
-- **Gemini CLI invocation (isolated):** Copy the scan to a temp directory and reference it from there to prevent Gemini from exploring other project files:
+- **Gemini CLI invocation (isolated):** Copy the scan to `/tmp/`, then invoke Gemini **from `/tmp/`** with sandbox flags to prevent it from reading project files:
   ```bash
-  cp Scans/NNN.jpg /tmp/gemini_scan_NNN.jpg && gemini -m gemini-2.5-pro -p "Transkribiere den Text als Markdown. Versuche das Layout beizubehalten. Sprache ist deutsch. Schrift ist Kurrent. Füge am Anfang Hinweise zur Transkription hinzu und am Ende historische Erläuterungen. Schreibe KEINE Dateien — gib den Text nur aus. @/tmp/gemini_scan_NNN.jpg" -o text
+  cp Scans/NNN.jpg /tmp/gemini_scan_NNN.jpg && cd /tmp && gemini -s --approval-mode plan -m gemini-2.5-pro -p "Transkribiere den Text als Markdown. Versuche das Layout beizubehalten. Sprache ist deutsch. Schrift ist Kurrent. Füge am Anfang Hinweise zur Transkription hinzu und am Ende historische Erläuterungen. Schreibe KEINE Dateien — gib den Text nur aus. @/tmp/gemini_scan_NNN.jpg" -o text
   ```
-- **Important:** Always copy the scan to `/tmp/` first and reference it there, so Gemini cannot read other transcripts. Also explicitly instruct Gemini not to write files (it sometimes tries to use write_file tools and fails).
+- **Isolation flags:**
+  - `cd /tmp` — sets CWD so `-s` restricts file reads to `/tmp/` only
+  - `-s` — sandbox mode: restricts `read_file`, `list_directory`, `glob`, `grep_search` to CWD
+  - `--approval-mode plan` — removes `run_shell_command` (no shell escape) and `web_fetch`
+  - `-o text` output is unaffected by write restrictions
+- **Important:** Always copy the scan to `/tmp/` first. The combination of `cd /tmp` + `-s` + `--approval-mode plan` ensures Gemini can only read files in `/tmp/` and cannot execute shell commands. Also explicitly instruct Gemini not to write files (it sometimes tries to use write_file tools and fails).
 - Timeout: 5 minutes per call.
 
 #### Phase 2c: Codex Transcription (`Scans/` → `Transkript/codex/`)
-- **Codex CLI invocation (isolated):** Copy the scan to an isolated temp git repo and run Codex from there to prevent it from exploring other project files and contaminating its transcription:
+- **Codex CLI invocation (isolated):** Clean leftover temp files, create a unique temp directory with a disposable git repo, copy only the scan, and run Codex from there:
   ```bash
-  mkdir -p /tmp/codex_isolated && cd /tmp/codex_isolated && git init --quiet 2>/dev/null
-  cp Scans/NNN.jpg /tmp/codex_isolated/scan.jpg
-  cd /tmp/codex_isolated && codex exec -i scan.jpg -m gpt-5.4 -s read-only --ephemeral "Transkribiere den Text als Markdown. Versuche das Layout beizubehalten. Sprache ist deutsch. Schrift ist Kurrent. Füge am Anfang Hinweise zur Transkription hinzu und am Ende historische Erläuterungen." -o /tmp/codex_NNN.md
+  rm -f /tmp/codex_*.md /tmp/gemini_scan_*.jpg
+  CODEX_DIR=$(mktemp -d /tmp/codex_XXXXXXXX) && cd "$CODEX_DIR" && git init --quiet
+  cp Scans/NNN.jpg "$CODEX_DIR/scan.jpg"
+  cd "$CODEX_DIR" && codex exec -i scan.jpg -m gpt-5.4 -s read-only --ephemeral "Transkribiere den Text als Markdown. Versuche das Layout beizubehalten. Sprache ist deutsch. Schrift ist Kurrent. Füge am Anfang Hinweise zur Transkription hinzu und am Ende historische Erläuterungen. Lies KEINE anderen Dateien außer scan.jpg." -o /tmp/codex_NNN.md
+  rm -rf "$CODEX_DIR"
   ```
-- **Important:** Codex requires a git repo (`-C /tmp` alone fails). Create a disposable git repo in `/tmp/codex_isolated/` and copy only the scan there. Without isolation, Codex explores existing transcript files and produces output matching a different page.
+- **Isolation strategy** (Codex `read-only` sandbox cannot restrict reads — it only restricts writes):
+  1. **Pre-run cleanup:** `rm -f /tmp/codex_*.md /tmp/gemini_scan_*.jpg` removes all leftover artifacts that Codex could read
+  2. **Unique temp dir:** `mktemp -d` prevents reuse of a fixed directory that might accumulate files across runs
+  3. **Prompt instruction:** Explicit "Lies KEINE anderen Dateien außer scan.jpg" as defense-in-depth
+  4. **Post-run cleanup:** `rm -rf "$CODEX_DIR"` removes the disposable git repo
+- **Important:** Codex requires a git repo. The pre-run cleanup is critical — without it, Codex reads `/tmp/codex_*.md` files from previous runs and produces contaminated output (confirmed on page 041).
 - Timeout: 5 minutes per call.
 
 #### Parallelization Strategy
