@@ -43,10 +43,11 @@
 | 044   | —                      | —                  | —                  | —               | 4                | Claude-only + Scan-Verifizierung. Gemini kontaminiert (1899/1900 statt 1908), gelöscht. Codex halluziniert (Kirchendokument). Spaziergang, Ernte, Kartoffelfäule. |
 | 045   | —                      | ~65%               | ~5%                | ~30%            | 2                | 2-Wege-Merge (Claude + Gemini). Kriegerdenkmal 1928, Lehrerwechsel Theis→Gierten, Zweiklassige Schule ab Oktober 1928. |
 | 087   | —                      | —                  | —                  | —               | 2                | Claude-only. Kapellenreparaturen Juni, Erntebericht August, Herbstferien September, Jahresbilanz November. Küster Peter Manns gewürdigt. |
+| 051   | ~5%                    | ~70%               | ~5%                | ~20%            | 2                | 3-Wege-Merge. Codex vollständig halluziniert (fabricated „Beurtheilung"-Dokument). Claude in mehreren Abschnitten garbled. Gemini klar beste Quelle. Kirchlichkeiten vs. Gedächtnisfeier unklar, „Kirchlichkeiten" übernommen. Schuljahr 1914/15, Kriegsausbruch. LaTeX: „Besondere Ereignisse" als \abschnitt korrigiert. |
 
 ## Zusammenfassung
 
-- Seiten zusammengeführt: 28 (005–006, 011–012, 017, 020–023, 029–030, 034–035, 036–045, 082–087)
+- Seiten zusammengeführt: 29 (005–006, 011–012, 017, 020–023, 029–030, 034–035, 036–045, 051, 082–087)
 - Gesamtumfang: 110 Seiten (001–110); Triple-LLM gilt für 002–110 (001 = Deckblatt, kein Text)
 - Durchschn. 3-Wege-Übereinstimmung: ~30%
 - Durchschn. 2-von-3 akzeptiert (Plausibilitätsprüfung bestanden): ~45%
@@ -68,9 +69,9 @@
 
 | LLM    | Seiten fertig                                                       | Seiten fehlend                                            |
 |--------|---------------------------------------------------------------------|-----------------------------------------------------------|
-| Claude | 002–088 (87 Seiten)                                                 | 089–110 (22 Seiten) — **pausiert**                       |
-| Gemini | 005–020, 021–028, 029–030, 031–039, 045, 082 (36 Seiten)           | 040–044, 046–081, 083–110 (040–044: kontaminiert, gelöscht) |
-| Codex  | 005–033, 034–035, 036–038, 039–044, 082–083 (42 Seiten)            | 045–081, 084–110                                         |
+| Claude | 002–088 (87 Seiten)                                                 | 089–110 (22 Seiten) — **in Bearbeitung**                 |
+| Gemini | 005–020, 021–028, 029–030, 031–039, 045, 051, 082 (37 Seiten)      | 040–044, 046–050, 052–081, 083–110 (040–044: kontaminiert, gelöscht) |
+| Codex  | 005–033, 034–035, 036–038, 039–044, 051, 082–083 (43 Seiten)       | 045–050, 052–081, 084–110                                |
 
 ## Rate-Limit-Protokoll
 
@@ -100,3 +101,6 @@
 | 2026-03-21  | Codex  | 034-035,039-044 | Batch-Transkription (8 Seiten). Qualität durchgehend schlecht: >70% [unleserlich], mehrere Seiten halluziniert (falsche Inhalte). Isolation via /tmp/codex_isolated_NNN/ verbesserte Seitenzuordnung, aber Codex 041 trotzdem kontaminiert (las /tmp-Dateien). |
 | 2026-03-21  | Claude | —     | Claude-Transkription auf Benutzerwunsch pausiert. Nur Merges durchgeführt. |
 | 2026-03-21  | Gemini | 040–044 | Kontaminierte Transkripte gelöscht. Gemini-Isolation über /tmp gescheitert — Gemini las Scans aus dem Projektverzeichnis und transkribierte falsche Seiten. Merges auf Claude-only + Scan-Verifizierung zurückgesetzt. |
+| 2026-03-21  | Gemini | 051   | Transkription erfolgreich. |
+| 2026-03-21  | Codex  | 051   | Transkription fehlgeschlagen — Codex halluzinierte ein „Beurtheilung"-Dokument statt der Schulchronik. |
+| 2026-03-21  | Claude | 089+  | Claude-Transkription Seiten 089–098 gestartet (Subagent läuft). |
