@@ -40,6 +40,17 @@ def parse_pipe_table(lines):
     return headers, rows
 
 
+def escape_latex(text):
+    r"""Escape bare LaTeX commands (e.g. \abschnitt) in prose text.
+
+    Wraps lone backslash-sequences in backticks so Pandoc does not pass
+    them through as LaTeX control sequences.  Already backtick-wrapped
+    commands are left untouched.
+    """
+    # Match \word that is NOT already inside backticks
+    return re.sub(r'(?<!`)\\([a-zA-Z]+)(?!`)', r'`\\\1`', text)
+
+
 def format_merge_cards(rows):
     """Convert merge stats rows to card layout."""
     out = []
@@ -57,7 +68,7 @@ def format_merge_cards(rows):
             out.append(f"**{key}:** {val}  ")
         anm = row.get("Anmerkungen", "")
         if anm:
-            out.append(f"\n{anm}\n")
+            out.append(f"\n{escape_latex(anm)}\n")
         out.append("")
     return "\n".join(out)
 

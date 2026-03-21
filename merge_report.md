@@ -43,7 +43,7 @@
 | 044   | —                      | —                  | —                  | —               | 4                | Claude-only + Scan-Verifizierung. Gemini kontaminiert (1899/1900 statt 1908), gelöscht. Codex halluziniert (Kirchendokument). Spaziergang, Ernte, Kartoffelfäule. |
 | 045   | —                      | ~65%               | ~5%                | ~30%            | 2                | 2-Wege-Merge (Claude + Gemini). Kriegerdenkmal 1928, Lehrerwechsel Theis→Gierten, Zweiklassige Schule ab Oktober 1928. |
 | 087   | —                      | —                  | —                  | —               | 2                | Claude-only. Kapellenreparaturen Juni, Erntebericht August, Herbstferien September, Jahresbilanz November. Küster Peter Manns gewürdigt. |
-| 051   | ~5%                    | ~70%               | ~5%                | ~20%            | 2                | 3-Wege-Merge. Codex vollständig halluziniert (fabricated „Beurtheilung"-Dokument). Claude in mehreren Abschnitten garbled. Gemini klar beste Quelle. Kirchlichkeiten vs. Gedächtnisfeier unklar, „Kirchlichkeiten" übernommen. Schuljahr 1914/15, Kriegsausbruch. LaTeX: „Besondere Ereignisse" als \abschnitt korrigiert. |
+| 051   | ~5%                    | ~70%               | ~5%                | ~20%            | 2                | 3-Wege-Merge. Codex vollständig halluziniert (fabricated „Beurtheilung"-Dokument). Claude in mehreren Abschnitten garbled. Gemini klar beste Quelle. Kirchlichkeiten vs. Gedächtnisfeier unklar, „Kirchlichkeiten" übernommen. Schuljahr 1914/15, Kriegsausbruch. LaTeX: „Besondere Ereignisse" als `\abschnitt` korrigiert. |
 
 ## Zusammenfassung
 
