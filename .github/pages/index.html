@@ -49,6 +49,15 @@
       transition: background 0.2s;
     }
     .download-btn:hover { background: #6b3410; }
+    .secondary-link {
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-size: 0.95rem;
+      color: #8b4513;
+      text-decoration: none;
+      border-bottom: 1px dotted #8b4513;
+    }
+    .secondary-link:hover { border-bottom-style: solid; }
     .meta {
       margin-top: 2rem;
       font-size: 0.85rem;
@@ -62,6 +71,8 @@
     <h1>Schul-Chronik Sefferweich</h1>
     <p class="subtitle">Transkription (1851 ff.)</p>
     <a href="schulchronik.pdf" class="download-btn">PDF herunterladen</a>
+    <br>
+    <a href="transkriptionsbericht.pdf" class="secondary-link">Transkriptionsbericht (PDF)</a>
     <div class="meta">
       <p>Letzte Aktualisierung: {{BUILD_DATE}}</p>
       <p>Arbeitskreis Geschichte Sefferweich</p>

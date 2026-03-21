@@ -13,6 +13,10 @@ Aus den zusammengeführten Ergebnissen entsteht am Ende ein durchsuchbarer Gesam
 **[→ Aktuelle PDF-Version der Schulchronik herunterladen](https://christianbaumann.github.io/schulchronik-sefferweich/schulchronik.pdf)**
 Die PDF wird bei jedem neuen Transkriptionsfortschritt automatisch aktualisiert.
 
+Zusätzlich gibt es einen **Transkriptionsbericht**, der zeigt, wie sicher die Entzifferung jeder einzelnen Seite ist — wo die drei KI-Systeme übereinstimmen, wo sie voneinander abweichen und welche Stellen noch von einem Menschen geprüft werden sollten.
+
+**[→ Transkriptionsbericht herunterladen](https://christianbaumann.github.io/schulchronik-sefferweich/transkriptionsbericht.pdf)**
+
 Das Projekt ist ein Vorhaben des **Arbeitskreises Geschichte [Sefferweich](https://www.sefferweich.de)**.
 
 > **Hinweis zum aktuellen Stand:** Dieses Projekt befindet sich in aktiver Bearbeitung. Die drei eingesetzten KI-Systeme (Claude, Gemini, Codex) unterscheiden sich deutlich in ihrer Fähigkeit, Kurrentschrift zu entziffern — manche liefern sehr gute Ergebnisse, andere haben noch erhebliche Schwächen. Da die Transkription pro KI unterschiedlich weit fortgeschritten ist, kann es vorkommen, dass für eine bestimmte Seite bisher nur die Lesung des schwächsten Systems in der zusammengeführten Fassung steht. Die Qualität einzelner Seiten kann daher derzeit noch stark schwanken. Mit jedem weiteren abgeschlossenen Transkriptionsdurchlauf und dem anschließenden 3-Wege-Abgleich verbessert sich die Gesamtqualität spürbar.
