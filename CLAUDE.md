@@ -41,7 +41,7 @@ Raw subfolders (`claude/`, `gemini/`, `codex/`) store **verbatim LLM output** �
 #### Phase 2b: Gemini Transcription (`Scans/` → `Transkript/gemini/`)
 - **Gemini CLI invocation (isolated):** Copy the scan to `/tmp/`, then invoke Gemini **from `/tmp/`** with sandbox flags to prevent it from reading project files:
   ```bash
-  cp Scans/NNN.jpg /tmp/gemini_scan_NNN.jpg && cd /tmp && gemini -s --approval-mode plan -m gemini-2.5-pro -p "Transkribiere den Text als Markdown. Versuche das Layout beizubehalten. Sprache ist deutsch. Schrift ist Kurrent. Füge am Anfang Hinweise zur Transkription hinzu und am Ende historische Erläuterungen. Schreibe KEINE Dateien — gib den Text nur aus. @/tmp/gemini_scan_NNN.jpg" -o text
+  cp Scans/NNN.jpg /tmp/gemini_scan_NNN.jpg && cd /tmp && gemini -s --approval-mode plan -m gemini-2.5-pro -p "Transcribe the text in the image as Markdown. Try to preserve the layout. The language is German. The script is Kurrent (old German handwriting). Add transcription notes at the beginning and historical explanations at the end. Do NOT write any files — only output the text. @/tmp/gemini_scan_NNN.jpg" -o text
   ```
 - **Isolation flags:**
   - `cd /tmp` — sets CWD so `-s` restricts file reads to `/tmp/` only
@@ -57,13 +57,13 @@ Raw subfolders (`claude/`, `gemini/`, `codex/`) store **verbatim LLM output** �
   rm -f /tmp/codex_*.md /tmp/gemini_scan_*.jpg
   CODEX_DIR=$(mktemp -d /tmp/codex_XXXXXXXX) && cd "$CODEX_DIR" && git init --quiet
   cp Scans/NNN.jpg "$CODEX_DIR/scan.jpg"
-  cd "$CODEX_DIR" && codex exec -i scan.jpg -m gpt-5.4 -s read-only --ephemeral "Transkribiere den Text als Markdown. Versuche das Layout beizubehalten. Sprache ist deutsch. Schrift ist Kurrent. Füge am Anfang Hinweise zur Transkription hinzu und am Ende historische Erläuterungen. Lies KEINE anderen Dateien außer scan.jpg." -o /tmp/codex_NNN.md
+  cd "$CODEX_DIR" && codex exec -i scan.jpg -m gpt-5.4 -s read-only --ephemeral "Transcribe the text in the image scan.jpg as Markdown. Use ONLY your built-in vision capability — do NOT use OCR, Tesseract, or any external tools. Try to preserve the layout. The language is German. The script is Kurrent (old German handwriting). Add transcription notes at the beginning and historical explanations at the end. Do NOT read any files other than scan.jpg and do NOT run any shell commands." -o /tmp/codex_NNN.md
   rm -rf "$CODEX_DIR"
   ```
 - **Isolation strategy** (Codex `read-only` sandbox cannot restrict reads — it only restricts writes):
   1. **Pre-run cleanup:** `rm -f /tmp/codex_*.md /tmp/gemini_scan_*.jpg` removes all leftover artifacts that Codex could read
   2. **Unique temp dir:** `mktemp -d` prevents reuse of a fixed directory that might accumulate files across runs
-  3. **Prompt instruction:** Explicit "Lies KEINE anderen Dateien außer scan.jpg" as defense-in-depth
+  3. **Prompt instruction:** Explicit "Do NOT read any files other than scan.jpg" as defense-in-depth
   4. **Post-run cleanup:** `rm -rf "$CODEX_DIR"` removes the disposable git repo
 - **Important:** Codex requires a git repo. The pre-run cleanup is critical — without it, Codex reads `/tmp/codex_*.md` files from previous runs and produces contaminated output (confirmed on page 041).
 - Timeout: 5 minutes per call.
