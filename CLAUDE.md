@@ -39,17 +39,21 @@ Raw subfolders (`claude/`, `gemini/`, `codex/`) store **verbatim LLM output** �
 - Use subagents to parallelize.
 
 #### Phase 2b: Gemini Transcription (`Scans/` → `Transkript/gemini/`)
-- **Gemini CLI invocation:**
+- **Gemini CLI invocation (isolated):** Copy the scan to a temp directory and reference it from there to prevent Gemini from exploring other project files:
   ```bash
-  gemini -m gemini-2.5-pro -p "Transkribiere den Text als Markdown. Versuche das Layout beizubehalten. Sprache ist deutsch. Schrift ist Kurrent. Füge am Anfang Hinweise zur Transkription hinzu und am Ende historische Erläuterungen. @Scans/NNN.jpg" -o text
+  cp Scans/NNN.jpg /tmp/gemini_scan_NNN.jpg && gemini -m gemini-2.5-pro -p "Transkribiere den Text als Markdown. Versuche das Layout beizubehalten. Sprache ist deutsch. Schrift ist Kurrent. Füge am Anfang Hinweise zur Transkription hinzu und am Ende historische Erläuterungen. Schreibe KEINE Dateien — gib den Text nur aus. @/tmp/gemini_scan_NNN.jpg" -o text
   ```
+- **Important:** Always copy the scan to `/tmp/` first and reference it there, so Gemini cannot read other transcripts. Also explicitly instruct Gemini not to write files (it sometimes tries to use write_file tools and fails).
 - Timeout: 5 minutes per call.
 
 #### Phase 2c: Codex Transcription (`Scans/` → `Transkript/codex/`)
-- **Codex CLI invocation:**
+- **Codex CLI invocation (isolated):** Copy the scan to an isolated temp git repo and run Codex from there to prevent it from exploring other project files and contaminating its transcription:
   ```bash
-  codex exec -i Scans/NNN.jpg -m gpt-5.4 -s read-only --ephemeral "Transkribiere den Text als Markdown. Versuche das Layout beizubehalten. Sprache ist deutsch. Schrift ist Kurrent. Füge am Anfang Hinweise zur Transkription hinzu und am Ende historische Erläuterungen." -o /tmp/codex_NNN.md
+  mkdir -p /tmp/codex_isolated && cd /tmp/codex_isolated && git init --quiet 2>/dev/null
+  cp Scans/NNN.jpg /tmp/codex_isolated/scan.jpg
+  cd /tmp/codex_isolated && codex exec -i scan.jpg -m gpt-5.4 -s read-only --ephemeral "Transkribiere den Text als Markdown. Versuche das Layout beizubehalten. Sprache ist deutsch. Schrift ist Kurrent. Füge am Anfang Hinweise zur Transkription hinzu und am Ende historische Erläuterungen." -o /tmp/codex_NNN.md
   ```
+- **Important:** Codex requires a git repo (`-C /tmp` alone fails). Create a disposable git repo in `/tmp/codex_isolated/` and copy only the scan there. Without isolation, Codex explores existing transcript files and produces output matching a different page.
 - Timeout: 5 minutes per call.
 
 #### Parallelization Strategy
