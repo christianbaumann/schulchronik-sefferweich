@@ -41,6 +41,7 @@ The `md2tex.py` converter uses spatial heuristics to classify lines (headings, m
 ## Known LaTeX Compilation Issues
 
 - [ ] **`\darueber` + reledmac interaction (page 010):** The `\darueber` command (textsuperscript annotation) triggers "Missing number" and "Illegal unit of measure" errors when used with reledmac line tracking. The PDF still compiles (nonstopmode) but these errors should be resolved. Possible fix: redefine `\darueber` to be reledmac-aware, or use a different annotation mechanism.
+- [ ] **Margin dates treated as inline text (page 057 and similar):** When margin dates like „15. Mai 1921" and „24. Mai" appear at the start of a line with body text following, md2tex.py's heuristic sometimes fails to detect them as margin notes and instead emits them as inline body text. This is a known limitation of the spatial column detection — the margin/body gap may be too small for the heuristic to trigger `\margmark`. Affects pages with date-margin diary-like layouts where the main column starts at a low column position.
 - [ ] **Title page (002) automation:** The title page has unique tabular structure with ditto marks, margin notes, and centered blocks. Currently preserved as a hand-crafted `.tex` file. Could be automated with a dedicated parser, but low priority since this page rarely changes.
 
 ## Future Ideas
