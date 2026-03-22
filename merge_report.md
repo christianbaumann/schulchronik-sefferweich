@@ -62,8 +62,8 @@
 
 ## Zusammenfassung
 
-- Seiten zusammengeführt: 44 (005–006, 011–012, 017, 020–023, 029–030, 034–035, 036–045, 051–056, 082–098)
-- Gesamtumfang: 110 Seiten (001–110); Triple-LLM gilt für 002–110 (001 = Deckblatt, kein Text)
+- Seiten zusammengeführt: 100 (000–099)
+- Gesamtumfang: 146 Seiten (000–145); Triple-LLM gilt für 002–145 (000–001 = Einband/Deckblatt)
 - Durchschn. 3-Wege-Übereinstimmung: ~30%
 - Durchschn. 2-von-3 akzeptiert (Plausibilitätsprüfung bestanden): ~45%
 - Durchschn. 2-von-3 abgelehnt (Plausibilitätsprüfung gescheitert): ~5%
@@ -80,13 +80,13 @@
     Seite 001 ist das Deckblatt (keine Texttranskription nötig).
   - Seiten 045–110: 66 neue Chronik-Seiten (~1904–1940er). Vollständige Triple-LLM-Pipeline ausstehend.
 
-## Phase-4-Status (Stand: 2026-03-20, Batch 2)
+## Phase-4-Status (Stand: 2026-03-22)
 
 | LLM    | Seiten fertig                                                       | Seiten fehlend                                            |
 |--------|---------------------------------------------------------------------|-----------------------------------------------------------|
-| Claude | 002–098 (97 Seiten)                                                 | 099–110 (12 Seiten)                                      |
-| Gemini | 005–020, 021–028, 029–030, 031–039, 045, 051–056, 082 (42 Seiten)  | 040–044, 046–050, 057–081, 083–110 (040–044: kontaminiert, gelöscht) |
-| Codex  | 005–033, 034–035, 036–038, 039–044, 051–056, 082–083 (48 Seiten)   | 045–050, 057–081, 084–110                                |
+| Claude | 002–099 (98 Seiten)                                                 | 000, 100–145 (47 Seiten)                                 |
+| Gemini | 001–002, 003–004, 005–071, 082, 099 (71 Seiten)                    | 000, 072–081, 083–098, 100–145 (72 Seiten)               |
+| Codex  | 001–065, 066–069, 082–083, 099 (68 Seiten)                         | 000, 070–081, 084–098, 100–145 (75 Seiten)               |
 
 ## Rate-Limit-Protokoll
 
@@ -119,3 +119,6 @@
 | 2026-03-21  | Gemini | 051   | Transkription erfolgreich. |
 | 2026-03-21  | Codex  | 051   | Transkription fehlgeschlagen — Codex halluzinierte ein „Beurtheilung"-Dokument statt der Schulchronik. |
 | 2026-03-21  | Claude | 089+  | Claude-Transkription Seiten 089–098 gestartet (Subagent läuft). |
+| 2026-03-22  | Gemini | 003,004,065–071 | Batch-Transkription erfolgreich (9 Seiten). Gute Qualität, bestätigt Claude-Lesungen. |
+| 2026-03-22  | Codex  | 002–004,064–069 | Batch-Transkription (8 Seiten). Typisch schlechte Qualität: >80% [unleserlich] auf den meisten Seiten. Seite 002 fast komplett halluziniert. |
+| 2026-03-22  | Claude | 100+  | Claude-Transkription Seiten 100–109 gestartet (Subagent läuft). |
