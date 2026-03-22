@@ -27,8 +27,9 @@ The `md2tex.py` converter uses spatial heuristics to classify lines (headings, m
 ## Transcript Structure Fixes
 
 - [ ] **Fix pre-pipeline transcripts (000, 003, 004, 008-010):** These early pages lack the standard `### Hinweise zur Transkription` and `### Historische und sprachliche Analyse` sections. They need to be re-transcribed through the triple-LLM pipeline or manually reformatted to pass `Scripts/validate_transcripts.py`.
-- [ ] **Fix recent incomplete transcripts (051-057):** These pages also lack standard sections — likely added before the structural convention was fully established. Reformat or re-merge.
+- [ ] **Fix recent incomplete transcripts (051-056):** These pages also lack standard sections — likely added before the structural convention was fully established. Reformat or re-merge.
 - [ ] **Update gold/020.tex:** The gold-standard file for page 020 is outdated (based on an older, less accurate transcription). Update it to match the current merged transcript.
+- [ ] **CI validation workaround:** `validate_transcripts.py` in CI uses `continue-on-error: true` because 12 pre-pipeline files fail. Once all files are fixed (see items above), remove `continue-on-error: true` from `.github/workflows/build-pdf.yml` so validation actually blocks broken commits.
 
 ## Research Tasks
 
@@ -37,6 +38,11 @@ The `md2tex.py` converter uses spatial heuristics to classify lines (headings, m
   - **Layout descriptor:** Add structured metadata (YAML frontmatter or sidecar JSON) per page during merge, describing margin note positions, heading types, verse blocks, etc.
   - **Hybrid approach:** Keep the spatial heuristic parser but add a validation/confidence pass that flags pages where layout detection is uncertain, requiring human review.
   - **Contract in CLAUDE.md:** Document the exact spatial layout conventions as a formal spec in CLAUDE.md so the merge step and the converter share a stable contract.
+
+## Automation Script Issues
+
+- [ ] **`\pstart`/`\pend` nesting validation too permissive:** `validate_nesting()` in `md2tex.py` allows ±1 nesting imbalance per file to accommodate the `generate_main.py` convention (external `\pstart` for prose-start pages, external `\pend` for some hand-crafted pages). This means a single mismatched `\pstart` or `\pend` — the most common real error — is silently accepted. Fix: validate nesting across the full assembled document (read `generate_main.py`'s include order) rather than per-file.
+- [ ] **No negative tests for automation scripts:** The plan listed specific negative test cases (malformed transcript → exit 1, empty text block → exit 1, unmatched `\pstart` → detected, extra `\pend` → detected) but none were actually executed. Create a `tests/` directory with test fixtures and a simple test runner to verify edge cases.
 
 ## Known LaTeX Compilation Issues
 
