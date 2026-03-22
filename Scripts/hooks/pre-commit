@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# If any Transkript/*.md file is staged, regenerate Transkript.txt and stage it.
+if git diff --cached --name-only | grep -q '^Transkript/[0-9].*\.md$'; then
+    python3 Scripts/generate_transkript_txt.py
+    git add Transkript.txt
+fi
+
+# Validate structural integrity of staged transcripts (Phase 3)
+STAGED_MD=$(git diff --cached --name-only | grep '^Transkript/[0-9].*\.md$' || true)
+if [ -n "$STAGED_MD" ] && [ -f Scripts/validate_transcripts.py ]; then
+    python3 Scripts/validate_transcripts.py $STAGED_MD || exit 1
+fi

@@ -684,6 +684,40 @@ def discover_pages(single_page: str | None = None) -> list[str]:
     return pages
 
 
+def validate_nesting(tex_path: str) -> list[str]:
+    r"""Check \pstart/\pend nesting in a .tex file. Returns list of errors.
+
+    Convention: pages starting with prose don't emit \pstart — the main file
+    provides it. So the first \pend may be "unmatched" within the file. We
+    allow depth to dip to -1 once (for the external \pstart), but not further.
+    """
+    errors = []
+    depth = 0
+    external_pstart_used = False
+    with open(tex_path, encoding="utf-8") as f:
+        for i, line in enumerate(f, 1):
+            for cmd in re.findall(r"\\(pstart|pend)\b", line):
+                if cmd == "pstart":
+                    depth += 1
+                else:
+                    depth -= 1
+                    if depth < 0:
+                        if not external_pstart_used:
+                            # Allow one unmatched \pend for external \pstart
+                            external_pstart_used = True
+                            depth = 0
+                        else:
+                            errors.append(
+                                f"{tex_path}:{i}: \\pend without matching \\pstart"
+                            )
+                            depth = 0
+    # Allow depth == 1 at end: some pages (e.g., hand-crafted 002) leave
+    # a \pstart open that the main file closes.
+    if depth > 1:
+        errors.append(f"{tex_path}: {depth} unclosed \\pstart at end of file")
+    return errors
+
+
 def validate_gold_standard() -> bool:
     """Compare generated output against gold-standard files."""
     if not os.path.isdir(GOLD_DIR):
@@ -743,6 +777,17 @@ def main():
 
     if args.validate:
         success = validate_gold_standard()
+        # Also check \pstart/\pend nesting in all generated .tex files
+        tex_files = sorted(glob.glob(os.path.join(PAGES_DIR, "*.tex")))
+        nesting_errors = []
+        for tf in tex_files:
+            nesting_errors.extend(validate_nesting(tf))
+        if nesting_errors:
+            for err in nesting_errors:
+                print(f"  NESTING: {err}")
+            success = False
+        else:
+            print(f"  NESTING: {len(tex_files)} .tex files OK")
         sys.exit(0 if success else 1)
 
     pages = discover_pages(args.page)

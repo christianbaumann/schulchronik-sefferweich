@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Pre-push hook: pull --rebase before pushing to avoid rejected pushes
+# from CI auto-commits (LaTeX generation, Transkript.txt).
+git pull --rebase || { echo "Rebase failed — resolve conflicts first."; exit 1; }

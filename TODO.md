@@ -24,6 +24,12 @@ The `md2tex.py` converter uses spatial heuristics to classify lines (headings, m
   - Diary-format pages (dates in left margin) are detected by a date-pattern ratio heuristic; unusual date formats may be missed.
 - **Current gold-standard pages:** 002, 005, 012, 015, 020 (in `LaTeX/gold/` once Phase 4 is completed).
 
+## Transcript Structure Fixes
+
+- [ ] **Fix pre-pipeline transcripts (000, 003, 004, 008-010):** These early pages lack the standard `### Hinweise zur Transkription` and `### Historische und sprachliche Analyse` sections. They need to be re-transcribed through the triple-LLM pipeline or manually reformatted to pass `Scripts/validate_transcripts.py`.
+- [ ] **Fix recent incomplete transcripts (051-057):** These pages also lack standard sections — likely added before the structural convention was fully established. Reformat or re-merge.
+- [ ] **Update gold/020.tex:** The gold-standard file for page 020 is outdated (based on an older, less accurate transcription). Update it to match the current merged transcript.
+
 ## Research Tasks
 
 - [ ] **Robust layout detection for MD→LaTeX conversion:** The current `md2tex.py` conversion relies on spatial heuristics (column positions, indentation patterns) to detect margin notes, headings, and main text in the `` ```text `` blocks of `Transkript/NNN.md`. This layout is produced by Claude during the merge step but is an implicit convention — not a formal contract. If the merge format drifts over time, the heuristic parser may break silently. Research directions:

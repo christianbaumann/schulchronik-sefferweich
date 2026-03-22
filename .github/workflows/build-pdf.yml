@@ -37,14 +37,21 @@ jobs:
       - name: Regenerate schulchronik.tex from pages
         run: python3 LaTeX/generate_main.py
 
+      - name: Regenerate Transkript.txt
+        run: python3 Scripts/generate_transkript_txt.py
+
+      - name: Validate transcript structure
+        run: python3 Scripts/validate_transcripts.py
+        continue-on-error: true  # Some pre-pipeline pages lack standard sections (see TODO.md)
+
       - name: Commit if changed
         id: commit
         run: |
-          git diff --quiet LaTeX/ && echo "changed=false" >> "$GITHUB_OUTPUT" && exit 0
+          git diff --quiet LaTeX/ Transkript.txt && echo "changed=false" >> "$GITHUB_OUTPUT" && exit 0
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add LaTeX/pages/ LaTeX/schulchronik.tex
-          git commit -m "Auto-generate LaTeX pages and schulchronik.tex [skip ci]"
+          git add LaTeX/pages/ LaTeX/schulchronik.tex Transkript.txt
+          git commit -m "Auto-generate LaTeX pages, schulchronik.tex, and Transkript.txt [skip ci]"
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
 

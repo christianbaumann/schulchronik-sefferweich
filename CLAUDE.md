@@ -154,3 +154,25 @@ See **[LaTeX.md](LaTeX.md)** for the complete LaTeX setup: build instructions, c
 - Historical context: villages Sefferweich, Seffern, Bickendorf, Malbergweich (all Kreis Bitburg/Eifel region).
 - **No links needed for villages/towns within ~15 km of Sefferweich** (e.g., Fließem, Dudeldorf, Bickendorf, Schleid, Heilenbach, Idenheim, Schönecken, etc.) — these are local and need no Wikipedia reference.
 - The Gemini conversation used during initial transcription is linked in `gemini_link.txt`.
+
+## Git Hooks
+
+Local git hooks live in `Scripts/hooks/` and are installed via symlinks:
+
+```bash
+bash Scripts/install-hooks.sh
+```
+
+**Hooks:**
+- **pre-commit**: Auto-regenerates `Transkript.txt` when `Transkript/*.md` files are staged. Validates transcript structure (requires `Scripts/validate_transcripts.py`).
+- **pre-push**: Runs `git pull --rebase` before every push to prevent rejected pushes from CI auto-commits.
+
+**At session start:** Check if hooks are installed (`test -L .git/hooks/pre-commit`). If not, run `bash Scripts/install-hooks.sh`.
+
+## Code Style
+
+- Python 3.10+, ruff for linting/formatting
+- Line length: 100
+- Ruff rules: E, F, I, UP, B, SIM, RUF
+- After every task, commit changes with a brief but descriptive commit message.
+- After every task, check if CLAUDE.md needs updating.
