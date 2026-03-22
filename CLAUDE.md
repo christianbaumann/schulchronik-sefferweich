@@ -54,7 +54,7 @@ Raw subfolders (`claude/`, `gemini/`, `codex/`) store **verbatim LLM output** �
 #### Phase 2c: Codex Transcription (`Scans/` → `Transkript/codex/`)
 - **Codex CLI invocation (isolated):** Clean leftover temp files, create a unique temp directory with a disposable git repo, copy only the scan, and run Codex from there:
   ```bash
-  rm -f /tmp/codex_*.md /tmp/gemini_scan_*.jpg
+  rm -f /tmp/codex_*.md
   CODEX_DIR=$(mktemp -d /tmp/codex_XXXXXXXX) && cd "$CODEX_DIR" && git init --quiet
   cp Scans/NNN.jpg "$CODEX_DIR/scan.jpg"
   cd "$CODEX_DIR" && codex exec -i scan.jpg -m gpt-5.4 -s read-only --ephemeral "Transcribe the text in the image scan.jpg as Markdown. Use ONLY your built-in vision capability — do NOT use OCR, Tesseract, or any external tools. Try to preserve the layout. The language is German. The script is Kurrent (old German handwriting). Add transcription notes at the beginning and historical explanations at the end. Do NOT read any files other than scan.jpg and do NOT run any shell commands." -o /tmp/codex_NNN.md
