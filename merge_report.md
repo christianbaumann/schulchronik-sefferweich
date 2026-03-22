@@ -49,10 +49,20 @@
 | 054   | ~5%                    | ~70%               | ~5%                | ~20%            | 2                | 3-Wege-Merge. Codex halluziniert (1816 Vieh/Tambora). Claude garbled (914 M statt 717 M). 4. Kriegsanleihe, Schuljahr 1916-17, Sammlungen für Trier. Preise 2,20-2,40 Mk. |
 | 055   | ~10%                   | ~65%               | ~5%                | ~20%            | 2                | 3-Wege-Merge. Codex teilweise korrekte Epoche aber >70% unleserlich. Claude „Schuljahr 1914-18" statt korrekt „1917-18". 5.-7. Kriegsanleihe (352/720/580 M). Schuljahr 1918-19, Ostern 14.3.19. |
 | 056   | ~10%                   | ~65%               | ~5%                | ~20%            | 2                | 3-Wege-Merge. Codex halluziniert (Influenza-Bericht). Claude garbled (Schülerzahl „24" statt 44). Schuljahr 1919-20, Kriegsfolgen (7 Gefallene, 1 Krüppel, 4 Gefangene), Maul- u. Klauenseuche. LaTeX: Datumsnotiz korrigiert. |
+| 089   | —                      | —                  | —                  | —               | 3                | Claude-only. 1929 Jahresüberschrift, Rheinlandbesetzung, Masern/Keuchhusten-Epidemie, Kindersterbefälle. |
+| 090   | —                      | —                  | —                  | —               | 3                | Claude-only. Extremwinter 1928/29 (-20°C), eingefrorene Wasserleitungen, Grippeepidemie, Kriegerverein. |
+| 091   | —                      | —                  | —                  | —               | 2                | Claude-only. Spätwinterthaw, Schulentlassungen Ostern, Lehrer Ringo krank, Vertretung aus Malbergweich. |
+| 092   | —                      | —                  | —                  | —               | 2                | Claude-only. Pfingsten, Schulrevision Mahrbach, Blitzschlag und Brand bei Müller, Getreideernte. |
+| 093   | —                      | —                  | —                  | —               | 4                | Claude-only. Ernte 1929, Schulrevision, Gedenkfeier 9. November. **Scan 90° gedreht** — Lesbarkeit stark eingeschränkt. |
+| 094   | —                      | —                  | —                  | —               | 4                | Claude-only. Schulstatistik-Tabelle, Reinigungsferien, Advent. **Scan 180° gedreht** — Lesbarkeit stark eingeschränkt. |
+| 095   | —                      | —                  | —                  | —               | 2                | Claude-only. 1930 Jahresüberschrift, Hoffnung auf Rheinlandbefreiung, angefochtene Gemeinderatswahl, Kriegerverein. |
+| 096   | —                      | —                  | —                  | —               | 2                | Claude-only. Erneute Gemeinderatswahl (3 Listen, 104 Wahlberechtigte), Zeppelin-Erwähnung. |
+| 097   | —                      | —                  | —                  | —               | 2                | Claude-only. Rheinlandbefreiung 30. Juni 1930, Glockenläuten, Reichstag aufgelöst, Hindenburg-Besuch. |
+| 098   | —                      | —                  | —                  | —               | 2                | Claude-only. Gemeinderats-Pattsituation, Reichstagswahl Sep. 1930 (Zentrum 80, SPD 16, NSDAP 5). Hindenburg in Trier. |
 
 ## Zusammenfassung
 
-- Seiten zusammengeführt: 34 (005–006, 011–012, 017, 020–023, 029–030, 034–035, 036–045, 051–056, 082–087)
+- Seiten zusammengeführt: 44 (005–006, 011–012, 017, 020–023, 029–030, 034–035, 036–045, 051–056, 082–098)
 - Gesamtumfang: 110 Seiten (001–110); Triple-LLM gilt für 002–110 (001 = Deckblatt, kein Text)
 - Durchschn. 3-Wege-Übereinstimmung: ~30%
 - Durchschn. 2-von-3 akzeptiert (Plausibilitätsprüfung bestanden): ~45%
@@ -74,7 +84,7 @@
 
 | LLM    | Seiten fertig                                                       | Seiten fehlend                                            |
 |--------|---------------------------------------------------------------------|-----------------------------------------------------------|
-| Claude | 002–088 (87 Seiten)                                                 | 089–110 (22 Seiten) — **in Bearbeitung**                 |
+| Claude | 002–098 (97 Seiten)                                                 | 099–110 (12 Seiten)                                      |
 | Gemini | 005–020, 021–028, 029–030, 031–039, 045, 051–056, 082 (42 Seiten)  | 040–044, 046–050, 057–081, 083–110 (040–044: kontaminiert, gelöscht) |
 | Codex  | 005–033, 034–035, 036–038, 039–044, 051–056, 082–083 (48 Seiten)   | 045–050, 057–081, 084–110                                |
 
