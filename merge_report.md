@@ -121,4 +121,6 @@
 | 2026-03-21  | Claude | 089+  | Claude-Transkription Seiten 089–098 gestartet (Subagent läuft). |
 | 2026-03-22  | Gemini | 003,004,065–071 | Batch-Transkription erfolgreich (9 Seiten). Gute Qualität, bestätigt Claude-Lesungen. |
 | 2026-03-22  | Codex  | 002–004,064–069 | Batch-Transkription (8 Seiten). Typisch schlechte Qualität: >80% [unleserlich] auf den meisten Seiten. Seite 002 fast komplett halluziniert. |
-| 2026-03-22  | Claude | 100+  | Claude-Transkription Seiten 100–109 gestartet (Subagent läuft). |
+| 2026-03-22  | Claude | 100–109 | Claude-Transkription Seiten 100–109 abgeschlossen. Als Claude-only-Merges gespeichert mit LaTeX-Generierung. |
+| 2026-03-22  | Gemini | 072   | Transkription erfolgreich. 2-Wege-Merge mit Claude aktualisiert. |
+| 2026-03-22  | Codex  | 070   | Transkription typisch schlecht — Codex halluziniert Kriegsnachrichten statt 1924-Schulchronik. Merge unverändert (Claude/Gemini-Konsens). |
