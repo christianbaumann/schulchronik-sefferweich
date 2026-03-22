@@ -165,9 +165,15 @@ bash Scripts/install-hooks.sh
 
 **Hooks:**
 - **pre-commit**: Auto-regenerates `Transkript.txt` when `Transkript/*.md` files are staged. Validates transcript structure (requires `Scripts/validate_transcripts.py`).
-- **pre-push**: Runs `git pull --rebase` before every push to prevent rejected pushes from CI auto-commits.
+- **pre-push**: Runs `git pull --rebase` before every push (safety net for direct `git push` calls).
 
-**At session start:** Check if hooks are installed (`test -L .git/hooks/pre-commit`). If not, run `bash Scripts/install-hooks.sh`.
+**Push wrapper (preferred over bare `git push`):**
+```bash
+bash Scripts/git-push.sh
+```
+Retries `pull --rebase` + `push` up to 3 times to handle the CI race condition (CI auto-commits arriving between rebase and push).
+
+**At session start:** Check if hooks are installed (`test -L .git/hooks/pre-commit`). If not, run `bash Scripts/install-hooks.sh`. **Always use `bash Scripts/git-push.sh` instead of `git push`.**
 
 ## Code Style
 

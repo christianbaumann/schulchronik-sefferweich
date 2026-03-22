@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
 # Pre-push hook: pull --rebase before pushing to avoid rejected pushes
 # from CI auto-commits (LaTeX generation, Transkript.txt).
+#
+# Note: For retry logic (CI race condition), use Scripts/git-push.sh instead
+# of plain `git push`. This hook still helps as a safety net for direct
+# `git push` calls.
 git pull --rebase || { echo "Rebase failed — resolve conflicts first."; exit 1; }
